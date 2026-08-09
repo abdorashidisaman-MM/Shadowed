@@ -8,6 +8,8 @@ namespace Shadowed.Player
     {
         [SerializeField] private float moveSpeed = 6f;
         [SerializeField] private float jumpSpeed =7f;
+        [SerializeField] private float acceleration = 35f;
+        [SerializeField] private float deceleration = 45f; 
         [SerializeField] private Transform groundCheck;
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
@@ -52,8 +54,22 @@ namespace Shadowed.Player
                 QueryTriggerInteraction.Ignore
             );
             Vector3 velocity = rb.linearVelocity;
+            float targetSpeed = moveInput * moveSpeed;
+            float changeRate;
 
-            velocity.x = moveInput * moveSpeed;
+            if (Mathf.Abs(moveInput) > 0.01f)
+            {
+                    changeRate = acceleration;
+            }
+                else
+            {
+                    changeRate = deceleration;
+            }
+            velocity.x = Mathf.MoveTowards(
+                velocity.x,
+                targetSpeed,
+                changeRate * Time.fixedDeltaTime
+            );
             if (jumpRequested && isGrounded && velocity.y <= 0.1f)
             {
                 velocity.y = jumpSpeed;
@@ -63,6 +79,18 @@ namespace Shadowed.Player
             rb.linearVelocity = velocity;
             jumpRequested = false;
 
+        }
+        private void OnDrawGizmosSelected()
+        {
+            if (groundCheck == null)
+            {
+                return;
+            }
+
+            Gizmos.DrawWireSphere(
+                groundCheck.position,
+                groundCheckRadius
+            );
         }
     }
 }
