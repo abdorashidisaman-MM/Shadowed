@@ -38,8 +38,13 @@ namespace Shadowed.Player
 
         private void Update()
         {
+            ReadInput();
+        }
+        private void ReadInput()
+        {
             moveInput = inputActions.Player.Move.ReadValue<float>();
-            if(inputActions.Player.Jump.WasPressedThisFrame())
+
+            if (inputActions.Player.Jump.WasPressedThisFrame())
             {
                 jumpRequested = true;
             }
@@ -47,38 +52,55 @@ namespace Shadowed.Player
 
         private void FixedUpdate()
         {
-            isGrounded=Physics.CheckSphere(
-                groundCheck.position,
-                groundCheckRadius,
-                groundLayer,
-                QueryTriggerInteraction.Ignore
-            );
+            CheckGrounded();
+            HandleHorizontalMovement();
+            HandleJump();
+        }
+        private void HandleHorizontalMovement()
+        {
             Vector3 velocity = rb.linearVelocity;
+
             float targetSpeed = moveInput * moveSpeed;
+
             float changeRate;
 
             if (Mathf.Abs(moveInput) > 0.01f)
             {
-                    changeRate = acceleration;
+                changeRate = acceleration;
             }
-                else
+            else
             {
-                    changeRate = deceleration;
+                changeRate = deceleration;
             }
+
             velocity.x = Mathf.MoveTowards(
                 velocity.x,
                 targetSpeed,
                 changeRate * Time.fixedDeltaTime
             );
-            if (jumpRequested && isGrounded && velocity.y <= 0.1f)
-            {
-                velocity.y = jumpSpeed;
-            }
-
 
             rb.linearVelocity = velocity;
-            jumpRequested = false;
+        }
+        private void CheckGrounded()
+        {
+            isGrounded = Physics.CheckSphere(
+                groundCheck.position,
+                groundCheckRadius,
+                groundLayer,
+                QueryTriggerInteraction.Ignore
+            );
+        }
+        private void HandleJump()
+        {
+        if (jumpRequested && isGrounded && rb.linearVelocity.y <= 0.1f)
+        {
+            Vector3 velocity = rb.linearVelocity;
 
+            velocity.y = jumpSpeed;
+
+            rb.linearVelocity = velocity;
+        }
+        jumpRequested = false;
         }
         private void OnDrawGizmosSelected()
         {
