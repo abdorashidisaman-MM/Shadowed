@@ -591,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 578279207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 1.5, z: -23}
+  m_LocalPosition: {x: -12, y: 1.5, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -628,8 +628,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 5, z: 1}
-  m_Center: {x: 0.5, y: 2, z: 0}
+  m_Size: {x: 15, y: 5, z: 1}
+  m_Center: {x: 1, y: 2, z: 0}
 --- !u!23 &578279211
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3660,6 +3660,10 @@ PrefabInstance:
     - target: {fileID: 2973543762672738928, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
       propertyPath: m_Constraints
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973543762672738928, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
       propertyPath: m_Name
