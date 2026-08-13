@@ -7,12 +7,17 @@ public class ShadowRange : MonoBehaviour
 {
     private LineRenderer connectionLine;
     private Transform playerTransform;
+    public string ShadowName;
+    private PlayerShadowInteraction Interaction;
+    
 
     void Start()
     {
         connectionLine = GetComponent<LineRenderer>();
         connectionLine.positionCount=2;
         connectionLine.enabled=false;
+        
+        
     }
     void Update()
     {
@@ -31,6 +36,11 @@ public class ShadowRange : MonoBehaviour
             Debug.Log("entered");
             playerTransform=other.transform;
             connectionLine.enabled=true;
+           Interaction= other.GetComponent<PlayerShadowInteraction>();
+           Interaction.SetCurrentShadow(this);
+            
+            
+            
         }
     }
     void OnTriggerExit(Collider other)
@@ -41,6 +51,9 @@ public class ShadowRange : MonoBehaviour
             Debug.Log("Exited");
             connectionLine.enabled=false;
             playerTransform = null;
+            Interaction= other.GetComponent<PlayerShadowInteraction>();
+            Interaction.ClearCurrentShadow(this);
+            
         }
     }
 
