@@ -41,7 +41,7 @@ namespace Shadowed.Player
         {
             ReadInput();
             
-                Debug.Log(aimInput);
+                
             
             
         }
