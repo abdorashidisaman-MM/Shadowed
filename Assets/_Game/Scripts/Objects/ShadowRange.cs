@@ -1,60 +1,92 @@
-using System;
-using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShadowRange : MonoBehaviour
 {
+    public string ShadowName;
+
     private LineRenderer connectionLine;
     private Transform playerTransform;
-    public string ShadowName;
-    private PlayerShadowInteraction Interaction;
-    
+    private PlayerShadowInteraction interaction;
+    private int playerLayerIndex;
 
-    void Start()
+    private void Awake()
     {
+        playerLayerIndex = LayerMask.NameToLayer("Player");
         connectionLine = GetComponent<LineRenderer>();
-        connectionLine.positionCount=2;
-        connectionLine.enabled=false;
-        
-        
-    }
-    void Update()
-    {
-        if(playerTransform!=null)
+
+        if (connectionLine != null)
         {
-             connectionLine.SetPosition(0, transform.position);
-             connectionLine.SetPosition(1, playerTransform.position);
+            connectionLine.positionCount = 2;
+            connectionLine.enabled = false;
         }
     }
-    
-    void OnTriggerEnter(Collider other)
+
+    private void Update()
     {
-        int layerIndex = LayerMask.NameToLayer("Player");
-        if(other.gameObject.layer == layerIndex)
+        if (connectionLine != null && playerTransform != null)
+        {
+            connectionLine.SetPosition(0, transform.position);
+            connectionLine.SetPosition(1, playerTransform.position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == playerLayerIndex)
         {
             Debug.Log("entered");
-            playerTransform=other.transform;
-            connectionLine.enabled=true;
-           Interaction= other.GetComponent<PlayerShadowInteraction>();
-           Interaction.SetCurrentShadow(this);
-            
-            
-            
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        int layerIndex = LayerMask.NameToLayer("Player");
-        if(other.gameObject.layer == layerIndex)
-        {
-            Debug.Log("Exited");
-            connectionLine.enabled=false;
-            playerTransform = null;
-            Interaction= other.GetComponent<PlayerShadowInteraction>();
-            Interaction.ClearCurrentShadow(this);
-            
+
+            if (other.TryGetComponent<PlayerShadowInteraction>(out interaction))
+            {
+                playerTransform = other.transform;
+                if (connectionLine != null)
+                {
+                    connectionLine.enabled = true;
+                }
+                interaction.AddShadow(this);
+            }
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == playerLayerIndex)
+        {
+            Debug.Log("Exited");
+
+            if (other.TryGetComponent<PlayerShadowInteraction>(out var exitInteraction))
+            {
+                exitInteraction.RemoveShadow(this);
+            }
+            else if (interaction != null)
+            {
+                interaction.RemoveShadow(this);
+            }
+
+            if (connectionLine != null)
+            {
+                connectionLine.enabled = false;
+            }
+
+            playerTransform = null;
+            interaction = null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (interaction != null)
+        {
+            interaction.RemoveShadow(this);
+            interaction = null;
+        }
+
+        if (connectionLine != null)
+        {
+            connectionLine.enabled = false;
+        }
+
+        playerTransform = null;
+    }
 }
+
