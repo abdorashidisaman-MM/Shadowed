@@ -17,6 +17,7 @@ namespace Shadowed.Player
         private Rigidbody rb;
         private GameInputActions inputActions;
         private float moveInput;
+        private Vector2 aimInput = new Vector2();
         private bool isGrounded;
         private bool jumpRequested; 
 
@@ -39,15 +40,21 @@ namespace Shadowed.Player
         private void Update()
         {
             ReadInput();
+            
+                Debug.Log(aimInput);
+            
+            
         }
         private void ReadInput()
         {
             moveInput = inputActions.Player.Move.ReadValue<float>();
+            aimInput = inputActions.Player.Aim.ReadValue<Vector2>();
 
             if (inputActions.Player.Jump.WasPressedThisFrame())
             {
                 jumpRequested = true;
             }
+
         }
 
         private void FixedUpdate()

@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShadowInteraction : MonoBehaviour
 {
-    private ShadowRange currentShadow;
+    private List <ShadowRange> nearbyShadows = new List<ShadowRange>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,15 +17,17 @@ public class PlayerShadowInteraction : MonoBehaviour
     }
     public void SetCurrentShadow(ShadowRange shadow)
     {
-        currentShadow=shadow;
+        if (!nearbyShadows.Contains(shadow))
+            {
+                nearbyShadows.Add(shadow);
+            }
         Debug.Log(shadow.ShadowName);
     }
     public void ClearCurrentShadow(ShadowRange shadow)
 {
-    if (currentShadow == shadow)
-    {
-        currentShadow = null;
-        Debug.Log("No current shadow");
-    }
+    if (nearbyShadows.Contains(shadow))
+            {
+                nearbyShadows.Remove(shadow);
+            }
 }
 }
