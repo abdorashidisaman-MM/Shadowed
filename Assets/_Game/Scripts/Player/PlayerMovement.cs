@@ -4,6 +4,7 @@ using Shadowed.Input;
 namespace Shadowed.Player
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(PlayerInputReader))]
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float moveSpeed = 6f;
@@ -15,42 +16,32 @@ namespace Shadowed.Player
         [SerializeField] private LayerMask groundLayer;
 
         private Rigidbody rb;
-        private GameInputActions inputActions;
         private float moveInput;
-        private Vector2 aimInput = new Vector2();
         private bool isGrounded;
         private bool jumpRequested; 
+        private PlayerInputReader inputReader;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            inputActions = new GameInputActions();
+            inputReader=GetComponent<PlayerInputReader>();
         }
 
-        private void OnEnable()
-        {
-            inputActions.Player.Enable();
-        }
-
-        private void OnDisable()
-        {
-            inputActions.Player.Disable();
-        }
 
         private void Update()
         {
             ReadInput();
             
-                
+               
             
             
         }
         private void ReadInput()
         {
-            moveInput = inputActions.Player.Move.ReadValue<float>();
-            aimInput = inputActions.Player.Aim.ReadValue<Vector2>();
+            moveInput = inputReader.MoveInput;
+           
 
-            if (inputActions.Player.Jump.WasPressedThisFrame())
+            if (inputReader.ConsumeJumpRequest())
             {
                 jumpRequested = true;
             }

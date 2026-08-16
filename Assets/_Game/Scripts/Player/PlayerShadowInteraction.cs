@@ -1,13 +1,20 @@
 using System.Collections.Generic;
+using Shadowed.Input;
 using UnityEngine;
-
+[RequireComponent(typeof(PlayerInputReader))]
 public class PlayerShadowInteraction : MonoBehaviour
 {
     private readonly List<ShadowRange> nearbyShadows = new List<ShadowRange>();
 
     public IReadOnlyList<ShadowRange> NearbyShadows => nearbyShadows;
+    private PlayerInputReader inputReader;
 
-    
+   
+    void Awake()
+    {
+        inputReader=GetComponent<PlayerInputReader>();
+        
+    }
     public void AddShadow(ShadowRange shadow)
     {
         if (shadow == null) return;
