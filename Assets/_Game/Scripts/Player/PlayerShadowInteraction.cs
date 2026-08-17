@@ -15,6 +15,7 @@ public class PlayerShadowInteraction : MonoBehaviour
 
     private Vector2 aimDirection;
     private float bestScore = -1f;
+    private float bestDistance;
     private  ShadowRange targetShadow;
 
     private void Awake()
@@ -33,10 +34,12 @@ public class PlayerShadowInteraction : MonoBehaviour
         }
 
         FindBestTarget();
+        GrabHandle();
     }
 
     private void FindBestTarget()
     {
+        bestDistance = Mathf.Infinity;
         if (targetShadow != null)
         {
             targetShadow.SetTargeted(false);
@@ -46,18 +49,44 @@ public class PlayerShadowInteraction : MonoBehaviour
 
         foreach (ShadowRange shadow in nearbyShadows)
         {
-            Vector2 directionToShadow = new Vector2(
-                shadow.transform.position.x - transform.position.x,
-                shadow.transform.position.y - transform.position.y
-            ).normalized;
+            Vector2 toShadow = new Vector2(
+    shadow.transform.position.x - transform.position.x,
+    shadow.transform.position.y - transform.position.y
+            );
+
+            float distance = toShadow.magnitude;
+            Vector2 directionToShadow = toShadow.normalized;
 
             float score = Vector2.Dot(aimDirection, directionToShadow);
 
-            if (score > bestScore)
-            {
-                bestScore = score;
-                targetShadow = shadow;
-            }
+            
+
+            if (targetShadow == null)
+                {
+                    bestScore = score;
+                    bestDistance = distance;
+                    targetShadow = shadow;
+                }
+                else
+                {
+                    float scoreDifference = score - bestScore;
+
+                    if (scoreDifference > 0.01f)
+                    {
+                        // Clearly better aim.
+                        bestScore = score;
+                        bestDistance = distance;
+                        targetShadow = shadow;
+                    }
+                    else if (Mathf.Abs(scoreDifference) <= 0.01f && distance < bestDistance)
+                    {
+                        // Aim is basically tied, so choose the closer shadow.
+                        bestScore = score;
+                        bestDistance = distance;
+                        targetShadow = shadow;
+                    }
+                }
+                
         }
 
         if (bestScore < minimumTargetScore)
@@ -93,6 +122,7 @@ public class PlayerShadowInteraction : MonoBehaviour
 
         
     }
+    
 
     public void RemoveShadow(ShadowRange shadow)
     {
@@ -108,4 +138,14 @@ public class PlayerShadowInteraction : MonoBehaviour
 
         
     }
+    private void GrabHandle()
+        {
+            if (!inputReader.ConsumeActionRequest())
+                return;
+
+            if (targetShadow != null)
+            {
+                targetShadow.Use();
+            }
+        }
 }

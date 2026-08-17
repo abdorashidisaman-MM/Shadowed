@@ -9,6 +9,7 @@ namespace Shadowed.Input
         public float MoveInput { get; private set; }
         public Vector2 AimInput { get; private set; }
         public bool JumpRequested { get; private set; }
+        public bool GrabRequest {get; private set; }
 
         private void Awake()
         {
@@ -29,6 +30,10 @@ namespace Shadowed.Input
         {
             MoveInput = inputActions.Player.Move.ReadValue<float>();
             AimInput = inputActions.Player.Aim.ReadValue<Vector2>();
+            if(inputActions.Player.Action.WasPressedThisFrame())
+            {
+                GrabRequest = true;
+            }
 
             if (inputActions.Player.Jump.WasPressedThisFrame())
             {
@@ -41,6 +46,17 @@ namespace Shadowed.Input
             if (JumpRequested)
             {
                 JumpRequested = false;
+                return true;
+            }
+
+            return false;
+        }
+        
+        public bool ConsumeActionRequest()
+        {
+            if (GrabRequest)
+            {
+                GrabRequest = false;
                 return true;
             }
 

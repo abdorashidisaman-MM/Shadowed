@@ -107,5 +107,9 @@ public class ShadowRange : MonoBehaviour
         lineMaterial.color = normalLineColor;
     }
 }
+    public void Use()
+        {
+            Debug.Log("Using shadow: " + gameObject.name);
+        }
 }
 
