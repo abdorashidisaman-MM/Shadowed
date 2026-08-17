@@ -15,7 +15,7 @@ public class PlayerShadowInteraction : MonoBehaviour
 
     private Vector2 aimDirection;
     private float bestScore = -1f;
-    private ShadowRange targetShadow;
+    private  ShadowRange targetShadow;
 
     private void Awake()
     {
@@ -37,6 +37,10 @@ public class PlayerShadowInteraction : MonoBehaviour
 
     private void FindBestTarget()
     {
+        if (targetShadow != null)
+        {
+            targetShadow.SetTargeted(false);
+        }
         bestScore = -1f;
         targetShadow = null;
 
@@ -60,12 +64,19 @@ public class PlayerShadowInteraction : MonoBehaviour
         {
             targetShadow = null;
         }
-
+        if (targetShadow != null)
+        {
+            targetShadow.SetTargeted(true);
+        }
         
     }
 
     private void ClearTarget()
     {
+        if (targetShadow != null)
+        {
+            targetShadow.SetTargeted(false);
+        }
         bestScore = -1f;
         targetShadow = null;
     }

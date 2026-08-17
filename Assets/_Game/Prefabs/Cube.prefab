@@ -126,6 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f93f6687aa97b4e89bc4231e3febf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShadowRange
+  normalLineColor: {r: 1, g: 1, b: 1, a: 1}
+  targetedLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  ShadowName: 
 --- !u!120 &264992025520689085
 LineRenderer:
   serializedVersion: 3
@@ -152,7 +155,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: b265390a87ca0b94db30d2c86fcb4741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

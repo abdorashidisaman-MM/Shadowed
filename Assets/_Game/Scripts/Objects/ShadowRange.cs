@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class ShadowRange : MonoBehaviour
 {
+    [SerializeField] private Color normalLineColor = Color.white;
+    [SerializeField] private Color targetedLineColor = Color.yellow;
     public string ShadowName;
 
     private LineRenderer connectionLine;
+    private Material lineMaterial;
     private Transform playerTransform;
     private PlayerShadowInteraction interaction;
     private int playerLayerIndex;
+    
+    
 
     private void Awake()
     {
+        
         playerLayerIndex = LayerMask.NameToLayer("Player");
         connectionLine = GetComponent<LineRenderer>();
 
@@ -19,6 +25,8 @@ public class ShadowRange : MonoBehaviour
             connectionLine.positionCount = 2;
             connectionLine.enabled = false;
         }
+        lineMaterial=connectionLine.material;
+        
     }
 
     private void Update()
@@ -88,5 +96,16 @@ public class ShadowRange : MonoBehaviour
 
         playerTransform = null;
     }
+    public void SetTargeted(bool targeted)
+{
+    if (targeted)
+    {
+        lineMaterial.color = targetedLineColor;
+    }
+    else
+    {
+        lineMaterial.color = normalLineColor;
+    }
+}
 }
 
