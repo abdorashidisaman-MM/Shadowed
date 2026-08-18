@@ -6,11 +6,12 @@ public class ShadowRange : MonoBehaviour
     [SerializeField] private Color targetedLineColor = Color.yellow;
     public string ShadowName;
 
-    private LineRenderer connectionLine;
+    public LineRenderer connectionLine;
     private Material lineMaterial;
     private Transform playerTransform;
     private PlayerShadowInteraction interaction;
     private int playerLayerIndex;
+    
     
     
 
@@ -42,7 +43,7 @@ public class ShadowRange : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayerIndex)
         {
-            Debug.Log("entered");
+            
 
             if (other.TryGetComponent<PlayerShadowInteraction>(out interaction))
             {
@@ -60,7 +61,7 @@ public class ShadowRange : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayerIndex)
         {
-            Debug.Log("Exited");
+            
 
             if (other.TryGetComponent<PlayerShadowInteraction>(out var exitInteraction))
             {
@@ -107,9 +108,12 @@ public class ShadowRange : MonoBehaviour
         lineMaterial.color = normalLineColor;
     }
 }
-    public void Use()
+    public void Take()
         {
-            Debug.Log("Using shadow: " + gameObject.name);
+            
+            connectionLine.enabled=false;
+            gameObject.SetActive(false);
         }
+    
 }
 

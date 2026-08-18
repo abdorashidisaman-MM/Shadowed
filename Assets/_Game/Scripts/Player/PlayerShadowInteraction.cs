@@ -17,6 +17,7 @@ public class PlayerShadowInteraction : MonoBehaviour
     private float bestScore = -1f;
     private float bestDistance;
     private  ShadowRange targetShadow;
+    private  ShadowRange equippedShadow;
 
     private void Awake()
     {
@@ -26,15 +27,19 @@ public class PlayerShadowInteraction : MonoBehaviour
     private void Update()
     {
         aimDirection = inputReader.AimInput.normalized;
-
+        
         if (aimDirection == Vector2.zero)
         {
             ClearTarget();
-            return;
+        }
+        else
+        {
+           FindBestTarget(); 
         }
 
-        FindBestTarget();
+        
         GrabHandle();
+        AttackHandle();
     }
 
     private void FindBestTarget()
@@ -140,12 +145,43 @@ public class PlayerShadowInteraction : MonoBehaviour
     }
     private void GrabHandle()
         {
-            if (!inputReader.ConsumeActionRequest())
+            if (!inputReader.ConsumeGrabRequest())
                 return;
 
             if (targetShadow != null)
             {
-                targetShadow.Use();
+                EquipShadow(targetShadow);
             }
         }
+    private void EquipShadow(ShadowRange shadow)
+    {
+        if(equippedShadow==null)
+        {
+        equippedShadow=shadow;
+        equippedShadow.Take();
+        Debug.Log("Equipped Shadow : " + equippedShadow);
+        }
+        else
+        {
+            Debug.Log("a weapon is already equipped");
+        }
+    }
+     private void AttackHandle()
+        {
+            if (!inputReader.ConsumeAttackRequest())
+                return;
+
+            if(equippedShadow!=null)
+            {
+                Attack();
+            }
+        }
+    private void Attack()
+    {
+        
+        {
+            Debug.Log("ATTTTACK");
+            equippedShadow=null;
+        }
+    }
 }

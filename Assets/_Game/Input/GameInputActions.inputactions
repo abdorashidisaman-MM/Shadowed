@@ -37,9 +37,19 @@
                     "priority": 0
                 },
                 {
-                    "name": "Action",
+                    "name": "Grab",
                     "type": "Button",
                     "id": "7cd8b732-f849-4f37-939b-150017d78afd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "a37c886e-5296-4806-97c7-9e43ca0890be",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -161,11 +171,22 @@
                 {
                     "name": "",
                     "id": "5753657d-7b9b-42fe-b14e-42f37ba57824",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cec254e2-af5a-44d3-9d28-73a87ad39ac6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
