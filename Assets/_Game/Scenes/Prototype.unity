@@ -605,6 +605,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: projectileCollider
+      value: 
+      objectReference: {fileID: 349325018}
+    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: interactionCollider
+      value: 
+      objectReference: {fileID: 996149062}
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -614,6 +622,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f652469af67221949b39730793caef0a, type: 3}
+--- !u!65 &349325018 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8482978160550380161, guid: f652469af67221949b39730793caef0a, type: 3}
+  m_PrefabInstance: {fileID: 349325017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &426872983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902224046901754487, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
@@ -1823,6 +1836,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
   m_PrefabInstance: {fileID: 349325017}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &996149062 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3201573143310167211, guid: f652469af67221949b39730793caef0a, type: 3}
+  m_PrefabInstance: {fileID: 349325017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126848867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2784,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!65 &1372113624 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3201573143310167211, guid: f652469af67221949b39730793caef0a, type: 3}
+  m_PrefabInstance: {fileID: 3655450181338388437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1430863469
 Mesh:
   m_ObjectHideFlags: 0
@@ -3659,6 +3682,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: projectileCollider
+      value: 
+      objectReference: {fileID: 3655450181338388438}
+    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: interactionCollider
+      value: 
+      objectReference: {fileID: 1372113624}
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name
       value: Cube1
@@ -3668,6 +3699,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f652469af67221949b39730793caef0a, type: 3}
+--- !u!65 &3655450181338388438 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8482978160550380161, guid: f652469af67221949b39730793caef0a, type: 3}
+  m_PrefabInstance: {fileID: 3655450181338388437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5627778570105857134
 PrefabInstance:
   m_ObjectHideFlags: 0

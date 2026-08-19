@@ -4,6 +4,8 @@ public class ShadowRange : MonoBehaviour
 {
     [SerializeField] private Color normalLineColor = Color.white;
     [SerializeField] private Color targetedLineColor = Color.yellow;
+    [SerializeField] private BoxCollider interactionCollider;
+    [SerializeField] private BoxCollider projectileCollider;
     public string ShadowName;
 
     public LineRenderer connectionLine;
@@ -118,6 +120,8 @@ private void OnTriggerExit(Collider other)
             if(interaction.equippedShadow==this)
             {
             isWorldShadow=false;
+            interactionCollider.enabled = false;
+            projectileCollider.enabled = false;
             connectionLine.enabled=false;
             transform.SetParent(interaction.transform);
             transform.localPosition = Vector3.zero;
@@ -126,8 +130,10 @@ private void OnTriggerExit(Collider other)
         }
     public void Throw(Vector3 aim,float speed)
     {
+     
      transform.SetParent(null);
      gameObject.SetActive(true);
+     projectileCollider.enabled = true;
      shadowRigidBody.isKinematic=false;
      shadowRigidBody.linearVelocity=aim*speed;
     }
