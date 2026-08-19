@@ -184,18 +184,9 @@ public class PlayerShadowInteraction : MonoBehaviour
         
         {
             
-            equippedShadow.transform.SetParent(null);
-            equippedShadow.gameObject.SetActive(true);
-            shadowRigidBody=equippedShadow.GetComponent<Rigidbody>();
-            shadowRigidBody.isKinematic=false;
+            
             attackAim=new Vector3(aimDirection.x,aimDirection.y,0);
-            Vector3 velocity = attackAim*attackSpeed;
-            shadowRigidBody.linearVelocity = velocity;    
-            Debug.Log("Aim: " + aimDirection);
-            Debug.Log("Attack Aim: " + attackAim);
-            Debug.Log("Velocity: " + shadowRigidBody.linearVelocity);
-            Debug.Log("Kinematic: " + shadowRigidBody.isKinematic);       
-            Debug.Log("ATTTTACK");
+            equippedShadow.Throw(attackAim,attackSpeed);    
             equippedShadow=null;
         }
     }

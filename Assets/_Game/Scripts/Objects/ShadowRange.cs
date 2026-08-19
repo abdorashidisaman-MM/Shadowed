@@ -12,13 +12,14 @@ public class ShadowRange : MonoBehaviour
     private PlayerShadowInteraction interaction;
     private int playerLayerIndex;
     private bool isWorldShadow = true;
+    private Rigidbody shadowRigidBody;
     
     
     
 
     private void Awake()
     {
-        
+        shadowRigidBody=gameObject.GetComponent<Rigidbody>();
         playerLayerIndex = LayerMask.NameToLayer("Player");
         connectionLine = GetComponent<LineRenderer>();
 
@@ -116,13 +117,20 @@ private void OnTriggerExit(Collider other)
         {
             if(interaction.equippedShadow==this)
             {
-                isWorldShadow=false;
+            isWorldShadow=false;
             connectionLine.enabled=false;
             transform.SetParent(interaction.transform);
             transform.localPosition = Vector3.zero;
             gameObject.SetActive(false);
             }
         }
+    public void Throw(Vector3 aim,float speed)
+    {
+     transform.SetParent(null);
+     gameObject.SetActive(true);
+     shadowRigidBody.isKinematic=false;
+     shadowRigidBody.linearVelocity=aim*speed;
+    }
     
 }
 
