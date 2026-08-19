@@ -130,6 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShadowRange
   normalLineColor: {r: 1, g: 1, b: 1, a: 1}
   targetedLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  interactionCollider: {fileID: 0}
+  projectileCollider: {fileID: 0}
   ShadowName: Cube1
   connectionLine: {fileID: 0}
 --- !u!120 &264992025520689085
@@ -279,6 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 880700914267697811}
   - component: {fileID: 8482978160550380161}
+  - component: {fileID: 6506435298107946225}
   m_Layer: 0
   m_Name: ProjectileHitbox
   m_TagString: Untagged
@@ -322,3 +325,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6506435298107946225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960345211000525276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c271e5dfd5a65743950065741357308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileHitbox

@@ -15,13 +15,14 @@ public class ShadowRange : MonoBehaviour
     private int playerLayerIndex;
     private bool isWorldShadow = true;
     private Rigidbody shadowRigidBody;
+  
     
     
     
 
     private void Awake()
     {
-        shadowRigidBody=gameObject.GetComponent<Rigidbody>();
+        shadowRigidBody=GetComponent<Rigidbody>();
         playerLayerIndex = LayerMask.NameToLayer("Player");
         connectionLine = GetComponent<LineRenderer>();
 
@@ -41,6 +42,7 @@ public class ShadowRange : MonoBehaviour
             connectionLine.SetPosition(0, transform.position);
             connectionLine.SetPosition(1, playerTransform.position);
         }
+        
     }
 
    private void OnTriggerEnter(Collider other)
@@ -137,6 +139,9 @@ private void OnTriggerExit(Collider other)
      shadowRigidBody.isKinematic=false;
      shadowRigidBody.linearVelocity=aim*speed;
     }
-    
+    public void HandleProjectileHit(Collider other)
+        {
+            Debug.Log("I hit " + LayerMask.LayerToName(other.gameObject.layer));
+        }
 }
 
