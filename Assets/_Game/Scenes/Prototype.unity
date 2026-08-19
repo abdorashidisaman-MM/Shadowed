@@ -605,10 +605,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
-      propertyPath: ShadowName
-      value: Cube
-      objectReference: {fileID: 0}
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -640,6 +636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9656edf568ff5e4ca03fdd5ee900dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShadowInteraction
+  minimumTargetScore: 0.7
+  attackSpeed: 20
 --- !u!4 &578279208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
@@ -3623,11 +3621,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12
+      value: -6.25
       objectReference: {fileID: 0}
     - target: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3660,10 +3658,6 @@ PrefabInstance:
     - target: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
-      propertyPath: ShadowName
-      value: Cube1
       objectReference: {fileID: 0}
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name

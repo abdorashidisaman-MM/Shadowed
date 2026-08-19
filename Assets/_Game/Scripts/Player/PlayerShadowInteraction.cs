@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerShadowInteraction : MonoBehaviour
 {
     [SerializeField] private float minimumTargetScore = 0.7f;
+    [SerializeField] private float attackSpeed = 10f;
 
     private readonly List<ShadowRange> nearbyShadows = new List<ShadowRange>();
 
@@ -17,7 +18,9 @@ public class PlayerShadowInteraction : MonoBehaviour
     private float bestScore = -1f;
     private float bestDistance;
     private  ShadowRange targetShadow;
-    private  ShadowRange equippedShadow;
+    private Rigidbody shadowRigidBody;
+    public  ShadowRange equippedShadow {get; private set;}
+    private Vector3 attackAim;
 
     private void Awake()
     {
@@ -180,6 +183,18 @@ public class PlayerShadowInteraction : MonoBehaviour
     {
         
         {
+            
+            equippedShadow.transform.SetParent(null);
+            equippedShadow.gameObject.SetActive(true);
+            shadowRigidBody=equippedShadow.GetComponent<Rigidbody>();
+            shadowRigidBody.isKinematic=false;
+            attackAim=new Vector3(aimDirection.x,aimDirection.y,0);
+            Vector3 velocity = attackAim*attackSpeed;
+            shadowRigidBody.linearVelocity = velocity;    
+            Debug.Log("Aim: " + aimDirection);
+            Debug.Log("Attack Aim: " + attackAim);
+            Debug.Log("Velocity: " + shadowRigidBody.linearVelocity);
+            Debug.Log("Kinematic: " + shadowRigidBody.isKinematic);       
             Debug.Log("ATTTTACK");
             equippedShadow=null;
         }

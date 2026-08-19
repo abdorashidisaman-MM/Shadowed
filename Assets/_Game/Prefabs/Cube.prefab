@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3201573143310167211}
   - component: {fileID: 4592026077784901267}
   - component: {fileID: 264992025520689085}
+  - component: {fileID: 4443824632375543231}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -112,8 +113,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 5, z: 1}
-  m_Center: {x: 1, y: 2, z: 0}
+  m_Size: {x: 15, y: 9, z: 1}
+  m_Center: {x: 1, y: 0, z: 0}
 --- !u!114 &4592026077784901267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShadowRange
   normalLineColor: {r: 1, g: 1, b: 1, a: 1}
   targetedLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  ShadowName: 
+  ShadowName: Cube1
+  connectionLine: {fileID: 0}
 --- !u!120 &264992025520689085
 LineRenderer:
   serializedVersion: 3
@@ -239,3 +241,30 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!54 &4443824632375543231
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386612150803110928}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -11,6 +11,7 @@ public class ShadowRange : MonoBehaviour
     private Transform playerTransform;
     private PlayerShadowInteraction interaction;
     private int playerLayerIndex;
+    private bool isWorldShadow = true;
     
     
     
@@ -39,48 +40,51 @@ public class ShadowRange : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == playerLayerIndex)
-        {
-            
+   private void OnTriggerEnter(Collider other)
+{
+    if (!isWorldShadow)
+        return;
 
-            if (other.TryGetComponent<PlayerShadowInteraction>(out interaction))
-            {
-                playerTransform = other.transform;
-                if (connectionLine != null)
-                {
-                    connectionLine.enabled = true;
-                }
-                interaction.AddShadow(this);
-            }
+    if (other.gameObject.layer != playerLayerIndex)
+        return;
+
+    if (other.TryGetComponent<PlayerShadowInteraction>(out interaction))
+    {
+        playerTransform = other.transform;
+
+        if (connectionLine != null)
+        {
+            connectionLine.enabled = true;
         }
+
+        interaction.AddShadow(this);
+    }
+}
+private void OnTriggerExit(Collider other)
+{
+    if (!isWorldShadow)
+        return;
+
+    if (other.gameObject.layer != playerLayerIndex)
+        return;
+
+    if (other.TryGetComponent<PlayerShadowInteraction>(out var exitInteraction))
+    {
+        exitInteraction.RemoveShadow(this);
+    }
+    else if (interaction != null)
+    {
+        interaction.RemoveShadow(this);
     }
 
-    private void OnTriggerExit(Collider other)
+    if (connectionLine != null)
     {
-        if (other.gameObject.layer == playerLayerIndex)
-        {
-            
-
-            if (other.TryGetComponent<PlayerShadowInteraction>(out var exitInteraction))
-            {
-                exitInteraction.RemoveShadow(this);
-            }
-            else if (interaction != null)
-            {
-                interaction.RemoveShadow(this);
-            }
-
-            if (connectionLine != null)
-            {
-                connectionLine.enabled = false;
-            }
-
-            playerTransform = null;
-            interaction = null;
-        }
+        connectionLine.enabled = false;
     }
+
+    playerTransform = null;
+    interaction = null;
+}
 
     private void OnDisable()
     {
@@ -110,9 +114,14 @@ public class ShadowRange : MonoBehaviour
 }
     public void Take()
         {
-            
+            if(interaction.equippedShadow==this)
+            {
+                isWorldShadow=false;
             connectionLine.enabled=false;
+            transform.SetParent(interaction.transform);
+            transform.localPosition = Vector3.zero;
             gameObject.SetActive(false);
+            }
         }
     
 }
