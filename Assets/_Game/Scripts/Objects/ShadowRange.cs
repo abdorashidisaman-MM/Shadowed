@@ -12,9 +12,12 @@ public class ShadowRange : MonoBehaviour
     private Material lineMaterial;
     private Transform playerTransform;
     private PlayerShadowInteraction interaction;
-    private int playerLayerIndex;
-    private bool isWorldShadow = true;
     private Rigidbody shadowRigidBody;
+    private int playerLayerIndex;
+    private int enemyLayerIndex;
+    private int environmentLayerIndex;
+    private bool isWorldShadow = true;
+    
   
     
     
@@ -24,6 +27,8 @@ public class ShadowRange : MonoBehaviour
     {
         shadowRigidBody=GetComponent<Rigidbody>();
         playerLayerIndex = LayerMask.NameToLayer("Player");
+        enemyLayerIndex = LayerMask.NameToLayer("Enemy");
+        environmentLayerIndex=LayerMask.NameToLayer("Environment");
         connectionLine = GetComponent<LineRenderer>();
 
         if (connectionLine != null)
@@ -141,11 +146,28 @@ private void OnTriggerExit(Collider other)
     }
     public void HandleProjectileHit(Collider other)
         {
-            Debug.Log(
-    "Hit: " + other.name +
-    " | Layer: " + LayerMask.LayerToName(other.gameObject.layer) +
-    " | Root: " + other.transform.root.name
-);
+            if(other.gameObject.layer==enemyLayerIndex)
+        {
+            HandleEnemyHit();
         }
+        else if(other.gameObject.layer==environmentLayerIndex)
+        {
+            HandleEnvironmentHit();
+        }
+        }
+    private void HandleEnemyHit()
+    {
+        Destroy(gameObject);
+    }
+    private void HandleEnvironmentHit()
+    {
+        projectileCollider.enabled = false;
+
+        if (!shadowRigidBody.isKinematic)
+        {
+            shadowRigidBody.linearVelocity = Vector3.zero;
+            shadowRigidBody.isKinematic = true;
+        }
+    }
 }
 
