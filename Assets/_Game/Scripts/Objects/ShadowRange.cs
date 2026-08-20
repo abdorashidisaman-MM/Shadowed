@@ -141,7 +141,11 @@ private void OnTriggerExit(Collider other)
     }
     public void HandleProjectileHit(Collider other)
         {
-            Debug.Log("I hit " + LayerMask.LayerToName(other.gameObject.layer));
+            Debug.Log(
+    "Hit: " + other.name +
+    " | Layer: " + LayerMask.LayerToName(other.gameObject.layer) +
+    " | Root: " + other.transform.root.name
+);
         }
 }
 

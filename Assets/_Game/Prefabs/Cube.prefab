@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4592026077784901267}
   - component: {fileID: 264992025520689085}
   - component: {fileID: 4443824632375543231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,8 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShadowRange
   normalLineColor: {r: 1, g: 1, b: 1, a: 1}
   targetedLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  interactionCollider: {fileID: 0}
-  projectileCollider: {fileID: 0}
+  interactionCollider: {fileID: 3201573143310167211}
+  projectileCollider: {fileID: 8482978160550380161}
   ShadowName: Cube1
   connectionLine: {fileID: 0}
 --- !u!120 &264992025520689085
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 880700914267697811}
   - component: {fileID: 8482978160550380161}
   - component: {fileID: 6506435298107946225}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

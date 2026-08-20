@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 79525283}
   - component: {fileID: 79525282}
   - component: {fileID: 79525281}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,14 +605,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
-      propertyPath: projectileCollider
-      value: 
-      objectReference: {fileID: 349325018}
-    - target: {fileID: 4592026077784901267, guid: f652469af67221949b39730793caef0a, type: 3}
-      propertyPath: interactionCollider
-      value: 
-      objectReference: {fileID: 996149062}
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name
       value: Cube
@@ -622,11 +614,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f652469af67221949b39730793caef0a, type: 3}
---- !u!65 &349325018 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 8482978160550380161, guid: f652469af67221949b39730793caef0a, type: 3}
-  m_PrefabInstance: {fileID: 349325017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &426872983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902224046901754487, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
@@ -670,7 +657,7 @@ GameObject:
   - component: {fileID: 696626593}
   - component: {fileID: 696626592}
   - component: {fileID: 696626591}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Left_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1026,7 +1013,7 @@ GameObject:
   - component: {fileID: 706582084}
   - component: {fileID: 706582083}
   - component: {fileID: 706582082}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Right_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1836,11 +1823,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
   m_PrefabInstance: {fileID: 349325017}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &996149062 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 3201573143310167211, guid: f652469af67221949b39730793caef0a, type: 3}
-  m_PrefabInstance: {fileID: 349325017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1124846111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,7 +2231,7 @@ GameObject:
   - component: {fileID: 1249235884}
   - component: {fileID: 1249235883}
   - component: {fileID: 1249235882}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3336,7 +3318,7 @@ GameObject:
   - component: {fileID: 1605660899}
   - component: {fileID: 1605660898}
   - component: {fileID: 1605660897}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3687,7 +3669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833100281}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestGeometry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3754,6 +3736,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1601004487}
     m_Modifications:
+    - target: {fileID: 3201573143310167211, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3201573143310167211, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: m_Center.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.25
@@ -3805,6 +3795,10 @@ PrefabInstance:
     - target: {fileID: 6386612150803110928, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: m_Name
       value: Cube1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960345211000525276, guid: f652469af67221949b39730793caef0a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
