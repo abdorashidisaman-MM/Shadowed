@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShadowRange : MonoBehaviour
@@ -6,6 +7,9 @@ public class ShadowRange : MonoBehaviour
     [SerializeField] private Color targetedLineColor = Color.yellow;
     [SerializeField] private BoxCollider interactionCollider;
     [SerializeField] private BoxCollider projectileCollider;
+    [SerializeField] private float fadeDuration = 1f;
+    private Color color;
+    private MeshRenderer shadowRenderer;
     public string ShadowName;
 
     public LineRenderer connectionLine;
@@ -25,6 +29,7 @@ public class ShadowRange : MonoBehaviour
 
     private void Awake()
     {
+        shadowRenderer=GetComponent<MeshRenderer>();
         shadowRigidBody=GetComponent<Rigidbody>();
         playerLayerIndex = LayerMask.NameToLayer("Player");
         enemyLayerIndex = LayerMask.NameToLayer("Enemy");
@@ -167,7 +172,28 @@ private void OnTriggerExit(Collider other)
         {
             shadowRigidBody.linearVelocity = Vector3.zero;
             shadowRigidBody.isKinematic = true;
+            StartCoroutine(EnvironmentDisappear());
         }
+    }
+    private IEnumerator EnvironmentDisappear()
+    {
+        yield return new WaitForSeconds(1f);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float alpha = 1f - (elapsedTime / fadeDuration);
+            color = shadowRenderer.material.color;
+            color.a = alpha;
+            shadowRenderer.material.color = color;
+
+            // apply alpha to material
+
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }
 

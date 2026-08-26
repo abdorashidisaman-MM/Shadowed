@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b34b07a45ba63ce47896c9e674f3a7a7, type: 2}
+  - {fileID: 2100000, guid: 7dfd2f0d1a042fb4b9de286edee275d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   targetedLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   interactionCollider: {fileID: 3201573143310167211}
   projectileCollider: {fileID: 8482978160550380161}
+  fadeDuration: 1
   ShadowName: Cube1
   connectionLine: {fileID: 0}
 --- !u!120 &264992025520689085
