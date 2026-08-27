@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 79525283}
   - component: {fileID: 79525282}
   - component: {fileID: 79525281}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173761535}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 696626593}
   - component: {fileID: 696626592}
   - component: {fileID: 696626591}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Left_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1133,7 @@ GameObject:
   - component: {fileID: 706582084}
   - component: {fileID: 706582083}
   - component: {fileID: 706582082}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Right_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2506,7 +2506,7 @@ GameObject:
   - component: {fileID: 1249235884}
   - component: {fileID: 1249235883}
   - component: {fileID: 1249235882}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3986,7 +3986,7 @@ GameObject:
   - component: {fileID: 1605660899}
   - component: {fileID: 1605660898}
   - component: {fileID: 1605660897}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Block_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4590,7 +4590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833100281}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TestGeometry
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,41 +1,33 @@
 using UnityEngine;
 
-public class EnemyShadow : MonoBehaviour
+public class EnemyShadow : MonoBehaviour , IDamageable
 {
-    private int projectileLayer;
     private BoxCollider enemyShadowCollider;
-    private EnemyHealth enemyHealth;
+    private EnemyHealth enemyHumanHealth;
     void Awake()
     {
-        enemyHealth=GetComponentInParent<EnemyHealth>();
-        projectileLayer=LayerMask.NameToLayer("Projectile");
+        enemyHumanHealth=GetComponentInParent<EnemyHealth>();
         enemyShadowCollider=GetComponent<BoxCollider>();
     
 
     }
      void OnEnable()
     {
-        enemyHealth.OnDeath+=DeathHandler;
+        enemyHumanHealth.OnDeath+=DeathHandler;
     }
     void OnDisable()
     {
-        enemyHealth.OnDeath-=DeathHandler;
+        enemyHumanHealth.OnDeath-=DeathHandler;
     }
     private void DeathHandler()
     {
         enemyShadowCollider.enabled=false;
         Debug.Log("i heard that the enemy is dead");
     }
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if(other.gameObject.layer==projectileLayer)
+    
+    public void TakeDamage(float amount)
         {
-            if (other.TryGetComponent<ProjectileHitbox>(out var projectile))
-             {
-            enemyHealth.TakeDamage(projectile.attackDamage);
-             }
+            enemyHumanHealth.TakeDamage(amount);
         }
-    }
 }
 
