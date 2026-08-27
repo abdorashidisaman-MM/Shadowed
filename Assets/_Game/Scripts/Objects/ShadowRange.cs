@@ -20,7 +20,15 @@ public class ShadowRange : MonoBehaviour
     private int playerLayerIndex;
     private int enemyLayerIndex;
     private int environmentLayerIndex;
-    private bool isWorldShadow = true;
+    
+    private enum ShadowState
+    {
+        World,
+        Equipped,
+        Thrown,
+        Stuck
+    }
+    private ShadowState currentState;
     
   
     
@@ -35,7 +43,7 @@ public class ShadowRange : MonoBehaviour
         enemyLayerIndex = LayerMask.NameToLayer("Enemy");
         environmentLayerIndex=LayerMask.NameToLayer("Environment");
         connectionLine = GetComponent<LineRenderer>();
-
+        currentState=ShadowState.World;
         if (connectionLine != null)
         {
             connectionLine.positionCount = 2;
@@ -57,7 +65,7 @@ public class ShadowRange : MonoBehaviour
 
    private void OnTriggerEnter(Collider other)
 {
-    if (!isWorldShadow)
+    if (currentState!=ShadowState.World)
         return;
 
     if (other.gameObject.layer != playerLayerIndex)
@@ -77,7 +85,7 @@ public class ShadowRange : MonoBehaviour
 }
 private void OnTriggerExit(Collider other)
 {
-    if (!isWorldShadow)
+    if (currentState!=ShadowState.World)
         return;
 
     if (other.gameObject.layer != playerLayerIndex)
@@ -131,7 +139,7 @@ private void OnTriggerExit(Collider other)
         {
             if(interaction.equippedShadow==this)
             {
-            isWorldShadow=false;
+            currentState=ShadowState.Equipped;
             interactionCollider.enabled = false;
             projectileCollider.enabled = false;
             connectionLine.enabled=false;
@@ -142,7 +150,7 @@ private void OnTriggerExit(Collider other)
         }
     public void Throw(Vector3 aim,float speed)
     {
-     
+     currentState=ShadowState.Thrown;
      transform.SetParent(null);
      gameObject.SetActive(true);
      projectileCollider.enabled = true;
@@ -151,6 +159,8 @@ private void OnTriggerExit(Collider other)
     }
     public void HandleProjectileHit(Collider other)
         {
+            if (currentState != ShadowState.Thrown)
+              return;
             if(other.gameObject.layer==enemyLayerIndex)
         {
             HandleEnemyHit();
@@ -167,7 +177,7 @@ private void OnTriggerExit(Collider other)
     private void HandleEnvironmentHit()
     {
         projectileCollider.enabled = false;
-
+        currentState=ShadowState.Stuck;
         if (!shadowRigidBody.isKinematic)
         {
             shadowRigidBody.linearVelocity = Vector3.zero;
@@ -188,9 +198,6 @@ private void OnTriggerExit(Collider other)
             color = shadowRenderer.material.color;
             color.a = alpha;
             shadowRenderer.material.color = color;
-
-            // apply alpha to material
-
             yield return null;
         }
         Destroy(gameObject);
