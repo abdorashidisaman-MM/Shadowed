@@ -3,16 +3,20 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private  bool isDead;
-    private float enemyHealth=100f;
-    public System.Action OnDeath;
-
+    [SerializeField] float MaxHealth=100f;
+    private float currentHealth;
+    public event System.Action OnDeath;
+    void Awake()
+    {
+        currentHealth=MaxHealth;
+    }
     public void TakeDamage(float amount)
     {
         if(!isDead)
         {
-        enemyHealth-=amount;
-        Debug.Log("Current Damage : "+enemyHealth);
-        if(enemyHealth<=0)
+        currentHealth-=amount;
+        Debug.Log("Current Damage : "+currentHealth);
+        if(currentHealth<=0)
         {
         Die();
         }
