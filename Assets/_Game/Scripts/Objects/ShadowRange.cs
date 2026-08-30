@@ -18,7 +18,6 @@ public class ShadowRange : MonoBehaviour
     private PlayerShadowInteraction interaction;
     private Rigidbody shadowRigidBody;
     private int playerLayerIndex;
-    private int enemyLayerIndex;
     private int environmentLayerIndex;
     
     private enum ShadowState
@@ -40,7 +39,6 @@ public class ShadowRange : MonoBehaviour
         shadowRenderer=GetComponent<MeshRenderer>();
         shadowRigidBody=GetComponent<Rigidbody>();
         playerLayerIndex = LayerMask.NameToLayer("Player");
-        enemyLayerIndex = LayerMask.NameToLayer("Enemy");
         environmentLayerIndex=LayerMask.NameToLayer("Environment");
         connectionLine = GetComponent<LineRenderer>();
         currentState=ShadowState.World;
@@ -161,16 +159,16 @@ private void OnTriggerExit(Collider other)
         {
             if (currentState != ShadowState.Thrown)
               return;
-            if(other.gameObject.layer==enemyLayerIndex)
+            if(other.TryGetComponent<IDamageable>(out _))
         {
-            HandleEnemyHit();
+            HandleDamageableHit();
         }
         else if(other.gameObject.layer==environmentLayerIndex)
         {
             HandleEnvironmentHit();
         }
         }
-    private void HandleEnemyHit()
+    private void HandleDamageableHit()
     {
         Destroy(gameObject);
     }
