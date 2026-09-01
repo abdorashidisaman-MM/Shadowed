@@ -8,7 +8,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float minimumDistance=0.1f;
     private EnemyHealth enemyHealth;
     private Transform currentTarget;
-    private bool isDead=false;
+    private Transform detectedPlayer;
+  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -27,7 +28,14 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
+        if(detectedPlayer!=null)
+        {
+            ChasePlayer();
+        }
+        else
+        {
         EnemyPatrol();
+        }
     }
     void EnemyPatrol()
     {
@@ -50,5 +58,19 @@ public class EnemyMovement : MonoBehaviour
     void EnemyDeath()
     {
         enabled = false;
+    }
+   public void PlayerDetected(Transform player)
+    {
+       detectedPlayer=player;
+       
+    }
+   public void PlayerLost()
+    {
+        detectedPlayer=null;
+     
+    }
+    private void ChasePlayer()
+    {
+         transform.position=Vector3.MoveTowards(transform.position,detectedPlayer.position,moveSpeed*Time.deltaTime);
     }
 }
