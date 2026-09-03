@@ -8,12 +8,20 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float minimumDistance=0.1f;
     private EnemyHealth enemyHealth;
     private Transform currentTarget;
+    private enum EnemyState
+    {
+        Patrol,
+        Chase,
+        Attack
+    }
+    private EnemyState currentState;
     private Transform detectedPlayer;
   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         enemyHealth=GetComponent<EnemyHealth>();
+        currentState=EnemyState.Patrol;
         currentTarget=pointA;
 
     }
@@ -28,11 +36,11 @@ public class EnemyMovement : MonoBehaviour
     }
     void Update()
     {
-        if(detectedPlayer!=null)
+        if(currentState==EnemyState.Chase)
         {
             ChasePlayer();
         }
-        else
+        else if(currentState==EnemyState.Patrol)
         {
         EnemyPatrol();
         }
@@ -62,15 +70,28 @@ public class EnemyMovement : MonoBehaviour
    public void PlayerDetected(Transform player)
     {
        detectedPlayer=player;
+       currentState=EnemyState.Chase;
        
     }
    public void PlayerLost()
     {
         detectedPlayer=null;
+        currentState=EnemyState.Patrol;
      
     }
     private void ChasePlayer()
     {
          transform.position=Vector3.MoveTowards(transform.position,detectedPlayer.position,moveSpeed*Time.deltaTime);
+    }
+    public void PlayerEnteredAttackRange()
+    {
+        currentState = EnemyState.Attack;
+    }
+    public void PlayerLeftAttackRange()
+    {
+        if (detectedPlayer != null)
+        {
+            currentState = EnemyState.Chase;
+        }
     }
 }

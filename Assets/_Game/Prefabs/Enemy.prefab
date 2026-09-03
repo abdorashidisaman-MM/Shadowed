@@ -317,6 +317,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10014c017e36084cb302c8dbaa2ca5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShadow
+--- !u!1 &6486992407278211988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 283127000226834261}
+  - component: {fileID: 3412344185560596704}
+  - component: {fileID: 3961833548532529261}
+  m_Layer: 7
+  m_Name: Attack Range
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &283127000226834261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486992407278211988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1873065358524413991}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3412344185560596704
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486992407278211988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3961833548532529261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6486992407278211988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13373ea0d66ae814c8e46b2075868819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackRange
 --- !u!1 &9053045286791942695
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +394,7 @@ GameObject:
   - component: {fileID: 1873065358524413991}
   - component: {fileID: 7900007864054780914}
   - component: {fileID: 289375721002635173}
+  - component: {fileID: 4493960951994997325}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -351,6 +418,7 @@ Transform:
   - {fileID: 4025029878467267283}
   - {fileID: 404326328593753451}
   - {fileID: 6045146304780556912}
+  - {fileID: 283127000226834261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7900007864054780914
@@ -380,5 +448,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   pointA: {fileID: 0}
   pointB: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 3
   minimumDistance: 0.1
+--- !u!114 &4493960951994997325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053045286791942695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83163a5d9857c474c8bdf92deb052359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  attackDamage: 10
+  attackCooldown: 1

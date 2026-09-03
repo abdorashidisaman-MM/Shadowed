@@ -743,7 +743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6506435298107946225, guid: f652469af67221949b39730793caef0a, type: 3}
       propertyPath: attackDamage
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -820,25 +820,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
---- !u!1 &567541473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
-  m_PrefabInstance: {fileID: 5627778570105857134}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &567541477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567541473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9656edf568ff5e4ca03fdd5ee900dee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerShadowInteraction
-  minimumTargetScore: 0.7
-  attackSpeed: 20
 --- !u!4 &578279208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3614926004385338595, guid: f652469af67221949b39730793caef0a, type: 3}
@@ -4658,14 +4639,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1879524147}
     m_Modifications:
-    - target: {fileID: 2973543762672738928, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
-      propertyPath: m_Constraints
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 2973543762672738928, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4710,17 +4683,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8266843413083485050, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 4ff5fe4db9f79b14992f9ac2a1966200, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 567541477}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

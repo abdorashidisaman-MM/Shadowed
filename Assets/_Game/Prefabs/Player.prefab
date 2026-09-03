@@ -102,6 +102,9 @@ GameObject:
   - component: {fileID: 8266843413083485050}
   - component: {fileID: 2973543762672738928}
   - component: {fileID: 8512185113717702698}
+  - component: {fileID: 350119800388239845}
+  - component: {fileID: 3322438760914281423}
+  - component: {fileID: 5744497712373207830}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -133,7 +136,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235003580075644676}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4ff5fe4db9f79b14992f9ac2a1966200, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -197,6 +200,45 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &350119800388239845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235003580075644676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82342538f4710c740ba137d331653390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shadowed.Input.PlayerInputReader
+--- !u!114 &3322438760914281423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235003580075644676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9656edf568ff5e4ca03fdd5ee900dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShadowInteraction
+  minimumTargetScore: 0.7
+  attackSpeed: 20
+--- !u!114 &5744497712373207830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235003580075644676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb5a1b39e97a4a409372cffb3131c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maximumHealth: 100
 --- !u!1 &7520383936182227290
 GameObject:
   m_ObjectHideFlags: 0
