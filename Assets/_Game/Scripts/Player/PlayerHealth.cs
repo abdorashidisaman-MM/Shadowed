@@ -4,7 +4,9 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 {
     [SerializeField] private float maximumHealth=100f;
     private float currentHealth;
+    public event System.Action OnDeath;
     private bool isDead;
+    
     void Awake()
     {
         currentHealth=maximumHealth;
@@ -24,5 +26,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private void Die()
     {
         isDead=true;
+        OnDeath?.Invoke();
     }
 }

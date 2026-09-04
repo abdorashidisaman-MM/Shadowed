@@ -20,13 +20,22 @@ namespace Shadowed.Player
         private bool isGrounded;
         private bool jumpRequested; 
         private PlayerInputReader inputReader;
+        private PlayerHealth playerHealth;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             inputReader=GetComponent<PlayerInputReader>();
+            playerHealth=GetComponent<PlayerHealth>();
         }
-
+        void OnEnable()
+        {
+            playerHealth.OnDeath+=PlayerDeath;
+        }
+        void OnDisable()
+        {
+            playerHealth.OnDeath-=PlayerDeath;
+        }
 
         private void Update()
         {
@@ -111,6 +120,19 @@ namespace Shadowed.Player
                 groundCheck.position,
                 groundCheckRadius
             );
+        
+        }
+       private void PlayerDeath()
+        {
+            moveInput = 0f;
+            jumpRequested = false;
+
+            Vector3 velocity = rb.linearVelocity;
+            velocity.x = 0f;
+            rb.linearVelocity = velocity;
+
+            enabled = false;
         }
     }
+    
 }

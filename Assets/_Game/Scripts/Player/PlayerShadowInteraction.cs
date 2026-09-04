@@ -13,20 +13,28 @@ public class PlayerShadowInteraction : MonoBehaviour
     public IReadOnlyList<ShadowRange> NearbyShadows => nearbyShadows;
 
     private PlayerInputReader inputReader;
+    private PlayerHealth playerHealth;
 
     private Vector2 aimDirection;
     private float bestScore = -1f;
     private float bestDistance;
     private  ShadowRange targetShadow;
-    private Rigidbody shadowRigidBody;
     public  ShadowRange equippedShadow {get; private set;}
     private Vector3 attackAim;
 
     private void Awake()
     {
         inputReader = GetComponent<PlayerInputReader>();
+        playerHealth=GetComponent<PlayerHealth>();
     }
-
+    void OnEnable()
+    {
+        playerHealth.OnDeath+=PlayerDeath;
+    }
+    void OnDisable()
+    {
+        playerHealth.OnDeath-=PlayerDeath;
+    }
     private void Update()
     {
         aimDirection = inputReader.AimInput.normalized;
@@ -189,5 +197,10 @@ public class PlayerShadowInteraction : MonoBehaviour
             equippedShadow.Throw(attackAim,attackSpeed);    
             equippedShadow=null;
         }
+    }
+    private void PlayerDeath()
+    {
+        ClearTarget();
+        enabled=false;
     }
 }
