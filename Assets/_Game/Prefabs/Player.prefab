@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 350119800388239845}
   - component: {fileID: 3322438760914281423}
   - component: {fileID: 5744497712373207830}
+  - component: {fileID: 2893695628989578011}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -239,6 +240,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maximumHealth: 100
+--- !u!114 &2893695628989578011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235003580075644676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec85486c98a7164e99f3a141ee25eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStealth
 --- !u!1 &7520383936182227290
 GameObject:
   m_ObjectHideFlags: 0
