@@ -4,94 +4,171 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
-    [SerializeField] private float moveSpeed=5f;
-    [SerializeField] private float minimumDistance=0.1f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float minimumDistance = 0.1f;
+
     private EnemyHealth enemyHealth;
     private Transform currentTarget;
+    private Transform detectedPlayer;
+
+    private bool playerInAttackRange;
+
     private enum EnemyState
     {
         Patrol,
         Chase,
         Attack
     }
+
     private EnemyState currentState;
-    private Transform detectedPlayer;
-  
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public bool CanAttack =>
+        currentState == EnemyState.Attack &&
+        detectedPlayer != null;
+
+
     void Awake()
     {
-        enemyHealth=GetComponent<EnemyHealth>();
-        currentState=EnemyState.Patrol;
-        currentTarget=pointA;
+        enemyHealth = GetComponent<EnemyHealth>();
 
+        currentState = EnemyState.Patrol;
+        currentTarget = pointA;
     }
+
 
     void OnEnable()
     {
-        enemyHealth.OnDeath+=EnemyDeath;
+        enemyHealth.OnDeath += EnemyDeath;
     }
+
+
     void OnDisable()
     {
-        enemyHealth.OnDeath-=EnemyDeath;
+        enemyHealth.OnDeath -= EnemyDeath;
     }
+
+
     void Update()
     {
-        if(currentState==EnemyState.Chase)
+        if (currentState == EnemyState.Chase)
         {
             ChasePlayer();
         }
-        else if(currentState==EnemyState.Patrol)
+        else if (currentState == EnemyState.Patrol)
         {
-        EnemyPatrol();
+            EnemyPatrol();
         }
     }
-    void EnemyPatrol()
+
+
+    private void EnemyPatrol()
     {
-        if(Vector3.Distance(transform.position, currentTarget.position)>=minimumDistance)
+        if (currentTarget == null)
         {
-        transform.position=Vector3.MoveTowards(transform.position,currentTarget.position,moveSpeed*Time.deltaTime);
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, currentTarget.position)
+            >= minimumDistance)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                currentTarget.position,
+                moveSpeed * Time.deltaTime
+            );
         }
         else
         {
-            if(currentTarget==pointA)
+            if (currentTarget == pointA)
             {
-            currentTarget=pointB;
+                currentTarget = pointB;
             }
             else
             {
-                currentTarget=pointA;
+                currentTarget = pointA;
             }
         }
     }
-    void EnemyDeath()
-    {
-        enabled = false;
-    }
-   public void PlayerDetected(Transform player)
-    {
-       detectedPlayer=player;
-       currentState=EnemyState.Chase;
-       
-    }
-   public void PlayerLost()
-    {
-        detectedPlayer=null;
-        currentState=EnemyState.Patrol;
-     
-    }
+
+
     private void ChasePlayer()
     {
-         transform.position=Vector3.MoveTowards(transform.position,detectedPlayer.position,moveSpeed*Time.deltaTime);
+        if (detectedPlayer == null)
+        {
+            return;
+        }
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            detectedPlayer.position,
+            moveSpeed * Time.deltaTime
+        );
     }
+
+
+    public void PlayerDetected(Transform player)
+    {
+        detectedPlayer = player;
+
+        if (playerInAttackRange)
+        {
+            currentState = EnemyState.Attack;
+        }
+        else
+        {
+            currentState = EnemyState.Chase;
+        }
+
+        Debug.Log(
+            "Player detected | AttackRange: "
+            + playerInAttackRange
+            + " | State: "
+            + currentState
+        );
+    }
+
+
+    public void PlayerLost()
+    {
+        detectedPlayer = null;
+        currentState = EnemyState.Patrol;
+
+        Debug.Log("Player lost | State: Patrol");
+    }
+
+
     public void PlayerEnteredAttackRange()
     {
-        currentState = EnemyState.Attack;
+        playerInAttackRange = true;
+
+        Debug.Log("ENTERED ATTACK RANGE");
+
+        if (detectedPlayer != null)
+        {
+            currentState = EnemyState.Attack;
+        }
     }
+
+
     public void PlayerLeftAttackRange()
     {
+        playerInAttackRange = false;
+
+        Debug.Log("LEFT ATTACK RANGE");
+
         if (detectedPlayer != null)
         {
             currentState = EnemyState.Chase;
         }
+        else
+        {
+            currentState = EnemyState.Patrol;
+        }
+    }
+
+
+    private void EnemyDeath()
+    {
+        enabled = false;
     }
 }

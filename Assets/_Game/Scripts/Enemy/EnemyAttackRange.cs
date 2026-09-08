@@ -3,43 +3,71 @@ using UnityEngine;
 public class EnemyAttackRange : MonoBehaviour
 {
     private int playerLayer;
+
     private EnemyMovement enemyMovement;
     private EnemyHealth enemyHealth;
     private EnemyAttack enemyAttack;
+
+
     void Awake()
     {
-        playerLayer=LayerMask.NameToLayer("Player");
-        enemyMovement=GetComponentInParent<EnemyMovement>();
-        enemyHealth=GetComponentInParent<EnemyHealth>();
-        enemyAttack=GetComponentInParent<EnemyAttack>();
+        playerLayer = LayerMask.NameToLayer("Player");
+
+        enemyMovement = GetComponentInParent<EnemyMovement>();
+        enemyHealth = GetComponentInParent<EnemyHealth>();
+        enemyAttack = GetComponentInParent<EnemyAttack>();
     }
+
+
     void OnEnable()
     {
-        enemyHealth.OnDeath+=EnemyDeath;
+        enemyHealth.OnDeath += EnemyDeath;
     }
+
+
     void OnDisable()
     {
-        enemyHealth.OnDeath-=EnemyDeath;
+        enemyHealth.OnDeath -= EnemyDeath;
     }
+
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer==playerLayer && other.TryGetComponent<IDamageable>(out var damageable))
+        if (other.gameObject.layer != playerLayer)
         {
-            enemyMovement.PlayerEnteredAttackRange();
-            enemyAttack.SetTarget(damageable);
-            Debug.Log("attack player");
+            return;
         }
+
+        IDamageable damageable =
+            other.GetComponentInParent<IDamageable>();
+
+        if (damageable == null)
+        {
+            return;
+        }
+
+        enemyMovement.PlayerEnteredAttackRange();
+        enemyAttack.SetTarget(damageable);
+
+        Debug.Log("Attack target acquired");
     }
+
+
     void OnTriggerExit(Collider other)
     {
-         if(other.gameObject.layer==playerLayer)
+        if (other.gameObject.layer != playerLayer)
         {
-            enemyMovement.PlayerLeftAttackRange();
-            enemyAttack.ClearTarget();
-            Debug.Log("player out of reach");
+            return;
         }
+
+        enemyMovement.PlayerLeftAttackRange();
+        enemyAttack.ClearTarget();
+
+        Debug.Log("Player out of attack range");
     }
-    void EnemyDeath()
+
+
+    private void EnemyDeath()
     {
         gameObject.SetActive(false);
     }
