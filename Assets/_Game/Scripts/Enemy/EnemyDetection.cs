@@ -14,7 +14,7 @@ public class EnemyDetection : MonoBehaviour
 
     [SerializeField] private LayerMask visionMask;
     [SerializeField] private Transform visionOrigin;
-
+    [SerializeField] private float viewAngle = 90f;
 
     void Awake()
     {
@@ -112,8 +112,9 @@ public class EnemyDetection : MonoBehaviour
         }
 
         bool shouldDetect =
-            !playerStealth.IsHidden &&
-            CanSeePlayer();
+        !playerStealth.IsHidden &&
+        IsPlayerInViewAngle() &&
+        CanSeePlayer();
 
         if (shouldDetect == isPlayerDetected)
         {
@@ -196,4 +197,19 @@ public class EnemyDetection : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+ private bool IsPlayerInViewAngle()
+{
+    Vector3 directionToPlayer =
+        detectedPlayer.position - visionOrigin.position;
+
+    // Shadowed plays primarily on the X/Y plane.
+    directionToPlayer.z = 0f;
+
+    float angle = Vector3.Angle(
+        enemyMovement.FacingDirection,
+        directionToPlayer.normalized
+    );
+
+    return angle <= viewAngle * 0.5f;
+}
 }

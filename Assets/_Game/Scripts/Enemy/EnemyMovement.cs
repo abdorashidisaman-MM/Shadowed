@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
     public bool CanAttack =>
         currentState == EnemyState.Attack &&
         detectedPlayer != null;
+    public Vector3 FacingDirection { get; private set; } = Vector3.right;
 
 
     void Awake()
@@ -71,6 +72,16 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, currentTarget.position)
             >= minimumDistance)
         {
+            Vector3 direction =
+                currentTarget.position - transform.position;
+
+            if (Mathf.Abs(direction.x) > 0.01f)
+            {
+                FacingDirection =
+                    direction.x > 0f
+                    ? Vector3.right
+                    : Vector3.left;
+            }
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 currentTarget.position,
@@ -97,7 +108,16 @@ public class EnemyMovement : MonoBehaviour
         {
             return;
         }
+        Vector3 direction =
+            detectedPlayer.position - transform.position;
 
+        if (Mathf.Abs(direction.x) > 0.01f)
+        {
+            FacingDirection =
+                direction.x > 0f
+                ? Vector3.right
+                : Vector3.left;
+        }
         transform.position = Vector3.MoveTowards(
             transform.position,
             detectedPlayer.position,
