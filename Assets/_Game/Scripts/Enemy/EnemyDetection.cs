@@ -151,12 +151,7 @@ public class EnemyDetection : MonoBehaviour
         visionMask,
         QueryTriggerInteraction.Ignore))
     {
-        Debug.Log(
-            "VISION HIT: " +
-            hit.collider.name +
-            " | Layer: " +
-            LayerMask.LayerToName(hit.collider.gameObject.layer)
-        );
+       
 
         PlayerStealth hitPlayer =
             hit.collider.GetComponentInParent<PlayerStealth>();

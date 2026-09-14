@@ -829,6 +829,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2812003262835361238, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
+      propertyPath: viewAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812003262835361238, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
       propertyPath: visionMask.m_Bits
       value: 264
       objectReference: {fileID: 0}
