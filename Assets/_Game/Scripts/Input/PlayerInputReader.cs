@@ -6,7 +6,7 @@ namespace Shadowed.Input
     {
         private GameInputActions inputActions;
 
-        public float MoveInput { get; private set; }
+        public Vector2 MoveInput { get; private set; }
         public Vector2 AimInput { get; private set; }
         public bool JumpRequested { get; private set; }
         public bool GrabRequest {get; private set; }
@@ -29,7 +29,7 @@ namespace Shadowed.Input
 
         private void Update()
         {
-            MoveInput = inputActions.Player.Move.ReadValue<float>();
+            MoveInput = inputActions.Player.Move.ReadValue<Vector2>();
             AimInput = inputActions.Player.Aim.ReadValue<Vector2>();
             if(inputActions.Player.Grab.WasPressedThisFrame())
             {
