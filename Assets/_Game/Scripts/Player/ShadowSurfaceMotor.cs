@@ -411,40 +411,42 @@ public class ShadowSurfaceMotor : MonoBehaviour
     }
 
 
-    private void TransitionToSurface(
-        RaycastHit newSurfaceHit)
+    private void TransitionToSurface(RaycastHit newSurfaceHit)
+{
+    Vector3 newNormal =
+        newSurfaceHit.normal.normalized;
+
+
+    currentSurfaceHit =
+        newSurfaceHit;
+
+    currentSurfaceNormal =
+        newNormal;
+
+    hasSurface = true;
+
+
+    // ---------------------------------
+    // VERTICAL WALL
+    // ---------------------------------
+
+    float verticalAlignment =
+        Mathf.Abs(
+            Vector3.Dot(
+                newNormal,
+                Vector3.up
+            )
+        );
+
+
+    bool isVerticalWall =
+        verticalAlignment < 0.1f;
+
+
+    if (isVerticalWall)
     {
-        Vector3 oldNormal =
-            currentSurfaceNormal;
-
-        Vector3 newNormal =
-            newSurfaceHit.normal;
-
-
-        Quaternion cornerRotation =
-            Quaternion.FromToRotation(
-                oldNormal,
-                newNormal
-            );
-
-
-        // Rotate our local movement directions
-        // around the corner.
         surfaceUp =
-            cornerRotation *
-            surfaceUp;
-
-        surfaceRight =
-            cornerRotation *
-            surfaceRight;
-
-
-        // Remove tiny floating-point errors.
-        surfaceUp =
-            Vector3.ProjectOnPlane(
-                surfaceUp,
-                newNormal
-            ).normalized;
+            Vector3.up;
 
 
         surfaceRight =
@@ -454,14 +456,13 @@ public class ShadowSurfaceMotor : MonoBehaviour
             ).normalized;
 
 
-        currentSurfaceHit =
-            newSurfaceHit;
-
-        currentSurfaceNormal =
-            newNormal;
-
-        hasSurface = true;
+        return;
     }
+
+
+    // Floor / ceiling behavior
+    // will be designed later.
+}
 
 
     private void InitializeSurfaceBasis()
