@@ -5,6 +5,14 @@ public class ShadowSurfaceMotor : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 4f;
+   
+    [Header("Jump and Gravity")]
+    [SerializeField] private float jumpSpeed = 7f;
+    [SerializeField] private float gravity = -20f;
+
+    private float verticalVelocity;
+    private bool jumpRequested;
+    private bool isSupported;
 
     [Header("Surface")]
     [SerializeField] private float surfaceOffset = 0.5f;
@@ -39,12 +47,6 @@ public class ShadowSurfaceMotor : MonoBehaviour
     private void Update()
     {
         moveInput = playerInput.MoveInput;
-
-
-        // -----------------------------
-        // INITIAL SURFACE
-        // -----------------------------
-
         if (!hasSurface)
         {
             if (!TryInitialSurface())
@@ -54,6 +56,33 @@ public class ShadowSurfaceMotor : MonoBehaviour
 
             AttachToSurface();
         }
+
+       if(playerInput.ConsumeJumpRequest())
+        {
+            jumpRequested=true;
+            
+        }
+       if (!isSupported)
+        {
+        verticalVelocity += gravity * Time.deltaTime;
+        }
+        if(jumpRequested)
+        {
+            if(isSupported)
+            {
+                verticalVelocity=jumpSpeed;
+                isSupported=false;
+            }
+            jumpRequested=false;
+        }
+        HandleVerticalMovement();
+
+        HandleHorizontalMovement();
+        // -----------------------------
+        // INITIAL SURFACE
+        // -----------------------------
+
+        
 
 
         // -----------------------------
@@ -128,8 +157,7 @@ public class ShadowSurfaceMotor : MonoBehaviour
     private Vector3 CalculateSurfaceMovement()
     {
         Vector3 movement =
-            surfaceRight * moveInput.x +
-            surfaceUp * moveInput.y;
+            surfaceRight * moveInput.x;
 
 
         if (movement.sqrMagnitude > 0f)
@@ -140,7 +168,109 @@ public class ShadowSurfaceMotor : MonoBehaviour
 
         return movement;
     }
+    
+    private void HandleVerticalMovement()
+        {
+            if (Mathf.Abs(verticalVelocity) < 0.001f)
+            {
+                return;
+            }
 
+            Vector3 verticalStep =
+                surfaceUp *
+                verticalVelocity *
+                Time.deltaTime;
+
+            Vector3 nextPosition =
+                transform.position +
+                verticalStep;
+
+
+            if (TryFindSurfaceAtNextPosition(
+                nextPosition,
+                out RaycastHit nextSurfaceHit))
+            {
+                currentSurfaceHit =
+                    nextSurfaceHit;
+
+                currentSurfaceNormal =
+                    nextSurfaceHit.normal;
+
+                transform.position =
+                    currentSurfaceHit.point +
+                    currentSurfaceNormal *
+                    surfaceOffset;
+
+                isSupported = false;
+
+                return;
+            }
+
+
+            // We tried to move downward,
+            // but there is no more wall below us.
+            if (verticalVelocity < 0f)
+            {
+                verticalVelocity = 0f;
+                isSupported = true;
+            }
+
+            // We tried to move upward,
+            // but reached the top edge of the wall.
+            else
+            {
+                verticalVelocity = 0f;
+            }
+        }
+        private void HandleHorizontalMovement()
+{
+    float horizontalInput = moveInput.x;
+
+    if (Mathf.Abs(horizontalInput) < 0.01f)
+    {
+        return;
+    }
+
+    Vector3 horizontalDirection =
+        surfaceRight * horizontalInput;
+
+    Vector3 nextPosition =
+        transform.position +
+        horizontalDirection *
+        moveSpeed *
+        Time.deltaTime;
+
+    if (TryFindSurfaceAtNextPosition(
+        nextPosition,
+        out RaycastHit nextSurfaceHit))
+    {
+        currentSurfaceHit =
+            nextSurfaceHit;
+
+        currentSurfaceNormal =
+            nextSurfaceHit.normal;
+
+        transform.position =
+            currentSurfaceHit.point +
+            currentSurfaceNormal *
+            surfaceOffset;
+
+        return;
+        }
+
+        if (TryFindCornerSurface(
+            nextPosition,
+            horizontalDirection,
+            out RaycastHit cornerHit))
+        {
+            TransitionToSurface(cornerHit);
+
+            transform.position =
+                cornerHit.point +
+                currentSurfaceNormal *
+                surfaceOffset;
+        }
+    }
 
     private bool TryInitialSurface()
     {
