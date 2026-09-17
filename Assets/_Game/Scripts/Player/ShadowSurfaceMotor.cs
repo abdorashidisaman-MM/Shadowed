@@ -5,511 +5,283 @@ public class ShadowSurfaceMotor : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 4f;
-   
-    [Header("Jump and Gravity")]
+
+    [Header("Jump And Gravity")]
     [SerializeField] private float jumpSpeed = 7f;
     [SerializeField] private float gravity = -20f;
 
-    private float verticalVelocity;
-    private bool jumpRequested;
-    private bool isSupported;
-
     [Header("Surface")]
     [SerializeField] private float surfaceOffset = 0.5f;
-    [SerializeField] private float surfaceCheckDistance = 1f;
-    [SerializeField] private LayerMask surfaceMask;
 
-    [Header("Corner Detection")]
-    [SerializeField] private float edgeProbeDistance = 0.6f;
-    [SerializeField] private float cornerProbeDistance = 1f;
-    [SerializeField] private float cornerInset = 0.05f;
+    [SerializeField]
+    private float initialSurfaceCheckDistance = 2f;
+
+    [SerializeField]
+    private float cornerInset = 0.1f;
+
+    [SerializeField]
+    private LayerMask surfaceMask;
+
 
     private PlayerInputReader playerInput;
 
-    private Vector2 moveInput;
+    private ShadowSurface currentSurface;
 
-    private RaycastHit currentSurfaceHit;
+    private float verticalVelocity;
 
-    private Vector3 currentSurfaceNormal;
-
-    private Vector3 surfaceUp;
-    private Vector3 surfaceRight;
-
-    private bool hasSurface;
+    private bool isSupported;
 
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInputReader>();
+        playerInput =
+            GetComponent<PlayerInputReader>();
     }
 
 
     private void Update()
     {
-        moveInput = playerInput.MoveInput;
-        if (!hasSurface)
+        // -----------------------------
+        // FIND INITIAL SURFACE
+        // -----------------------------
+
+        if (currentSurface == null)
         {
-            if (!TryInitialSurface())
+            if (!TryFindInitialSurface())
             {
                 return;
             }
-
-            AttachToSurface();
         }
 
-       if(playerInput.ConsumeJumpRequest())
+
+        // -----------------------------
+        // INPUT
+        // -----------------------------
+
+        float horizontalInput =
+            playerInput.MoveInput.x;
+
+
+        // -----------------------------
+        // JUMP
+        // -----------------------------
+
+        if (playerInput.ConsumeJumpRequest())
         {
-            jumpRequested=true;
-            
-        }
-       if (!isSupported)
-        {
-        verticalVelocity += gravity * Time.deltaTime;
-        }
-        if(jumpRequested)
-        {
-            if(isSupported)
+            if (isSupported)
             {
-                verticalVelocity=jumpSpeed;
-                isSupported=false;
+                verticalVelocity =
+                    jumpSpeed;
+
+                isSupported =
+                    false;
             }
-            jumpRequested=false;
         }
-        HandleVerticalMovement();
 
-        HandleHorizontalMovement();
+
         // -----------------------------
-        // INITIAL SURFACE
+        // GRAVITY
         // -----------------------------
 
-        
+        if (!isSupported)
+        {
+            verticalVelocity +=
+                gravity * Time.deltaTime;
+        }
 
 
         // -----------------------------
         // MOVEMENT
         // -----------------------------
 
-        Vector3 movement =
-            CalculateSurfaceMovement();
+        HandleVerticalMovement();
 
-        if (movement.sqrMagnitude == 0f)
-        {
-            return;
-        }
-
-
-        Vector3 nextPosition =
-            transform.position +
-            movement * moveSpeed * Time.deltaTime;
-
-
-        // -----------------------------
-        // CURRENT FACE CONTINUES
-        // -----------------------------
-
-        if (TryFindSurfaceAtNextPosition(
-            nextPosition,
-            out RaycastHit nextSurfaceHit))
-        {
-            currentSurfaceHit =
-                nextSurfaceHit;
-
-            currentSurfaceNormal =
-                nextSurfaceHit.normal;
-
-            hasSurface = true;
-
-            AttachToSurface();
-
-            return;
-        }
-
-
-        // -----------------------------
-        // OUTSIDE CORNER
-        // -----------------------------
-
-        if (TryFindCornerSurface(
-            nextPosition,
-            movement,
-            out RaycastHit cornerHit))
-        {
-            TransitionToSurface(
-                cornerHit
-            );
-
-
-            transform.position =
-                cornerHit.point +
-                currentSurfaceNormal *
-                surfaceOffset;
-
-
-            return;
-        }
-
-
-        // No valid surface found.
-        // Player remains where it is.
-    }
-
-
-    private Vector3 CalculateSurfaceMovement()
-    {
-        Vector3 movement =
-            surfaceRight * moveInput.x;
-
-
-        if (movement.sqrMagnitude > 0f)
-        {
-            movement.Normalize();
-        }
-
-
-        return movement;
-    }
-    
-    private void HandleVerticalMovement()
-        {
-            if (Mathf.Abs(verticalVelocity) < 0.001f)
-            {
-                return;
-            }
-
-            Vector3 verticalStep =
-                surfaceUp *
-                verticalVelocity *
-                Time.deltaTime;
-
-            Vector3 nextPosition =
-                transform.position +
-                verticalStep;
-
-
-            if (TryFindSurfaceAtNextPosition(
-                nextPosition,
-                out RaycastHit nextSurfaceHit))
-            {
-                currentSurfaceHit =
-                    nextSurfaceHit;
-
-                currentSurfaceNormal =
-                    nextSurfaceHit.normal;
-
-                transform.position =
-                    currentSurfaceHit.point +
-                    currentSurfaceNormal *
-                    surfaceOffset;
-
-                isSupported = false;
-
-                return;
-            }
-
-
-            // We tried to move downward,
-            // but there is no more wall below us.
-            if (verticalVelocity < 0f)
-            {
-                verticalVelocity = 0f;
-                isSupported = true;
-            }
-
-            // We tried to move upward,
-            // but reached the top edge of the wall.
-            else
-            {
-                verticalVelocity = 0f;
-            }
-        }
-        private void HandleHorizontalMovement()
-{
-    float horizontalInput = moveInput.x;
-
-    if (Mathf.Abs(horizontalInput) < 0.01f)
-    {
-        return;
-    }
-
-    Vector3 horizontalDirection =
-        surfaceRight * horizontalInput;
-
-    Vector3 nextPosition =
-        transform.position +
-        horizontalDirection *
-        moveSpeed *
-        Time.deltaTime;
-
-    if (TryFindSurfaceAtNextPosition(
-        nextPosition,
-        out RaycastHit nextSurfaceHit))
-    {
-        currentSurfaceHit =
-            nextSurfaceHit;
-
-        currentSurfaceNormal =
-            nextSurfaceHit.normal;
-
-        transform.position =
-            currentSurfaceHit.point +
-            currentSurfaceNormal *
-            surfaceOffset;
-
-        return;
-        }
-
-        if (TryFindCornerSurface(
-            nextPosition,
-            horizontalDirection,
-            out RaycastHit cornerHit))
-        {
-            TransitionToSurface(cornerHit);
-
-            transform.position =
-                cornerHit.point +
-                currentSurfaceNormal *
-                surfaceOffset;
-        }
-    }
-
-    private bool TryInitialSurface()
-    {
-        Vector3 direction =
-            transform.forward;
-
-
-        if (Physics.Raycast(
-            transform.position,
-            direction,
-            out RaycastHit hit,
-            surfaceCheckDistance,
-            surfaceMask))
-        {
-            currentSurfaceHit =
-                hit;
-
-            currentSurfaceNormal =
-                hit.normal;
-
-
-            InitializeSurfaceBasis();
-
-
-            hasSurface = true;
-
-
-            return true;
-        }
-
-
-        return false;
-    }
-
-
-    private bool TryFindSurfaceAtNextPosition(
-        Vector3 nextPosition,
-        out RaycastHit hit)
-    {
-        Vector3 direction =
-            -currentSurfaceNormal;
-
-
-        if (!Physics.Raycast(
-            nextPosition,
-            direction,
-            out hit,
-            surfaceCheckDistance,
-            surfaceMask))
-        {
-            return false;
-        }
-
-
-        float normalAlignment =
-            Vector3.Dot(
-                currentSurfaceNormal.normalized,
-                hit.normal.normalized
-            );
-
-
-        bool sameFace =
-            normalAlignment > 0.99f;
-
-
-        return sameFace;
-    }
-
-
-    private bool TryFindCornerSurface(
-        Vector3 nextPosition,
-        Vector3 movement,
-        out RaycastHit cornerHit)
-    {
-        Vector3 cornerProbeOrigin =
-            nextPosition
-            + movement * edgeProbeDistance
-            - currentSurfaceNormal *
-            (surfaceOffset + cornerInset);
-
-
-        Vector3 cornerProbeDirection =
-            -movement;
-
-
-        if (!Physics.Raycast(
-            cornerProbeOrigin,
-            cornerProbeDirection,
-            out cornerHit,
-            cornerProbeDistance,
-            surfaceMask))
-        {
-            return false;
-        }
-
-
-        Vector3 candidateNormal =
-            cornerHit.normal.normalized;
-
-
-        Vector3 normalizedMovement =
-            movement.normalized;
-
-
-        // Candidate face should be roughly
-        // perpendicular to the current face.
-        float surfaceAngle =
-            Mathf.Abs(
-                Vector3.Dot(
-                    currentSurfaceNormal.normalized,
-                    candidateNormal
-                )
-            );
-
-
-        bool isDifferentFace =
-            surfaceAngle < 0.1f;
-
-
-        // For an outside corner,
-        // the new face normal should point
-        // approximately in the direction
-        // we were travelling.
-        float movementAlignment =
-            Vector3.Dot(
-                candidateNormal,
-                normalizedMovement
-            );
-
-
-        bool isCorrectCorner =
-            movementAlignment > 0.9f;
-
-
-        return
-            isDifferentFace &&
-            isCorrectCorner;
-    }
-
-
-    private void TransitionToSurface(RaycastHit newSurfaceHit)
-{
-    Vector3 newNormal =
-        newSurfaceHit.normal.normalized;
-
-
-    currentSurfaceHit =
-        newSurfaceHit;
-
-    currentSurfaceNormal =
-        newNormal;
-
-    hasSurface = true;
-
-
-    // ---------------------------------
-    // VERTICAL WALL
-    // ---------------------------------
-
-    float verticalAlignment =
-        Mathf.Abs(
-            Vector3.Dot(
-                newNormal,
-                Vector3.up
-            )
+        HandleHorizontalMovement(
+            horizontalInput
         );
-
-
-    bool isVerticalWall =
-        verticalAlignment < 0.1f;
-
-
-    if (isVerticalWall)
-    {
-        surfaceUp =
-            Vector3.up;
-
-
-        surfaceRight =
-            Vector3.Cross(
-                newNormal,
-                surfaceUp
-            ).normalized;
-
-
-        return;
     }
 
 
-    // Floor / ceiling behavior
-    // will be designed later.
-}
-
-
-    private void InitializeSurfaceBasis()
+    private bool TryFindInitialSurface()
     {
-        Vector3 referenceUp =
-            Vector3.up;
-
-
-        // Vector3.up cannot be used if
-        // the surface itself faces up/down.
-        if (Mathf.Abs(
-            Vector3.Dot(
-                currentSurfaceNormal,
-                Vector3.up
-            )) > 0.99f)
+        if (!Physics.Raycast(
+            transform.position,
+            transform.forward,
+            out RaycastHit hit,
+            initialSurfaceCheckDistance,
+            surfaceMask,
+            QueryTriggerInteraction.Ignore))
         {
-            referenceUp =
-                Vector3.forward;
+            return false;
         }
 
 
-        surfaceRight =
-            Vector3.Cross(
-                currentSurfaceNormal,
-                referenceUp
-            ).normalized;
+        ShadowSurface surface =
+            hit.collider.GetComponent<ShadowSurface>();
 
 
-        surfaceUp =
-            Vector3.Cross(
-                surfaceRight,
-                currentSurfaceNormal
-            ).normalized;
+        if (surface == null)
+        {
+            return false;
+        }
+
+
+        currentSurface =
+            surface;
+
+
+        if (currentSurface.TrySnapPosition(
+            transform.position,
+            surfaceOffset,
+            out Vector3 snappedPosition))
+        {
+            transform.position =
+                snappedPosition;
+        }
+        else
+        {
+            transform.position =
+                hit.point +
+                currentSurface.Normal *
+                surfaceOffset;
+        }
+
+
+        verticalVelocity = 0f;
+        isSupported = false;
+
+
+        return true;
     }
 
 
-    private void AttachToSurface()
+    private void HandleVerticalMovement()
     {
-        if (!hasSurface)
+        if (Mathf.Abs(verticalVelocity) < 0.001f)
         {
             return;
         }
 
 
+        Vector3 verticalStep =
+            Vector3.up *
+            verticalVelocity *
+            Time.deltaTime;
+
+
+        Vector3 desiredPosition =
+            transform.position +
+            verticalStep;
+
+
+        if (currentSurface.TrySnapPosition(
+            desiredPosition,
+            surfaceOffset,
+            out Vector3 snappedPosition))
+        {
+            transform.position =
+                snappedPosition;
+
+            isSupported =
+                false;
+
+            return;
+        }
+
+
+        // -----------------------------
+        // BOTTOM EDGE
+        // -----------------------------
+
+        if (verticalVelocity < 0f)
+        {
+            verticalVelocity = 0f;
+
+            isSupported = true;
+
+            return;
+        }
+
+
+        // -----------------------------
+        // TOP EDGE
+        // -----------------------------
+
+        verticalVelocity = 0f;
+    }
+
+
+    private void HandleHorizontalMovement(
+        float horizontalInput)
+    {
+        if (Mathf.Abs(horizontalInput) < 0.01f)
+        {
+            return;
+        }
+
+
+        Vector3 horizontalStep =
+            currentSurface.Right *
+            horizontalInput *
+            moveSpeed *
+            Time.deltaTime;
+
+
+        Vector3 desiredPosition =
+            transform.position +
+            horizontalStep;
+
+
+        // -----------------------------
+        // STILL ON CURRENT WALL
+        // -----------------------------
+
+        if (currentSurface.TrySnapPosition(
+            desiredPosition,
+            surfaceOffset,
+            out Vector3 snappedPosition))
+        {
+            transform.position =
+                snappedPosition;
+
+            return;
+        }
+
+
+        // -----------------------------
+        // REACHED AN EDGE
+        // -----------------------------
+
+        ShadowSurface nextSurface =
+            currentSurface.GetConnection(
+                horizontalInput
+            );
+
+
+        if (nextSurface == null)
+        {
+            return;
+        }
+
+
+        bool enteringFromLeft =
+            horizontalInput > 0f;
+
+
+        Vector3 transitionPosition =
+            nextSurface.GetEntryPosition(
+                transform.position,
+                enteringFromLeft,
+                surfaceOffset,
+                cornerInset
+            );
+
+
+        currentSurface =
+            nextSurface;
+
+
         transform.position =
-            currentSurfaceHit.point +
-            currentSurfaceNormal *
-            surfaceOffset;
+            transitionPosition;
     }
 }
