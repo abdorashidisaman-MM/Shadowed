@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3322438760914281423}
   - component: {fileID: 5744497712373207830}
   - component: {fileID: 2893695628989578011}
+  - component: {fileID: 8455758642151441622}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -147,7 +148,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -175,8 +176,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 1
@@ -187,7 +188,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235003580075644676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33d129b63f223cf4fa7ba7e987be2172, type: 3}
   m_Name: 
@@ -220,7 +221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235003580075644676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9656edf568ff5e4ca03fdd5ee900dee, type: 3}
   m_Name: 
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235003580075644676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fb5a1b39e97a4a409372cffb3131c0f, type: 3}
   m_Name: 
@@ -247,11 +248,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235003580075644676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dec85486c98a7164e99f3a141ee25eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStealth
+--- !u!114 &8455758642151441622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235003580075644676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8669c8b1ab1f710499526536a9fda2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShadowSurfaceMotor
+  moveSpeed: 4
+  jumpSpeed: 7
+  gravity: -20
+  surfaceOffset: 0.5
+  initialSurfaceCheckDistance: 2
+  cornerInset: 0.1
+  surfaceMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7520383936182227290
 GameObject:
   m_ObjectHideFlags: 0
