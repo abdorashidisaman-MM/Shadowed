@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Shadowed.Input;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(PlayerInputReader))]
 public class PlayerShadowInteraction : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerShadowInteraction : MonoBehaviour
     private readonly List<ShadowRange> nearbyShadows = new List<ShadowRange>();
 
     public IReadOnlyList<ShadowRange> NearbyShadows => nearbyShadows;
+    public event Action<ShadowRange> OnShadowEquipped;
 
     private PlayerInputReader inputReader;
     private PlayerHealth playerHealth;
@@ -170,6 +172,7 @@ public class PlayerShadowInteraction : MonoBehaviour
         {
         equippedShadow=shadow;
         equippedShadow.Take();
+        OnShadowEquipped?.Invoke(equippedShadow);
         Debug.Log("Equipped Shadow : " + equippedShadow);
         }
         else

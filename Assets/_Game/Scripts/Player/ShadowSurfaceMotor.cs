@@ -284,4 +284,21 @@ public class ShadowSurfaceMotor : MonoBehaviour
         transform.position =
             transitionPosition;
     }
+   public void AttachToSurface(ShadowSurface surface)
+    {
+        
+         if (surface.TrySnapPosition(
+            transform.position,
+            surfaceOffset,
+            out Vector3 snappedPosition))
+        {
+            currentSurface=surface;
+            transform.position =
+                snappedPosition;
+        verticalVelocity=0;
+        isSupported=true;
+
+
+    }
+    }
 }

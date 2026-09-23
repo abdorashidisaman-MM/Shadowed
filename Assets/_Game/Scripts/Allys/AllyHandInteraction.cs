@@ -6,6 +6,7 @@ public class AllyHandInteraction : MonoBehaviour
 {
     [SerializeField] private PlayableDirector allyAssistDirector;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    private Collider interactionZone;
 
     private bool assistStarted;
     private PlayerInputReader playerInputReader;
@@ -18,11 +19,16 @@ public class AllyHandInteraction : MonoBehaviour
     {
         playerLayer =
             LayerMask.NameToLayer("Player");
+            interactionZone = GetComponent<Collider>();
     }
 
 
     private void Update()
     {
+        if (assistStarted)
+        {
+            return;
+        }
         if (!playerInReach)
         {
             return;
@@ -38,14 +44,17 @@ public class AllyHandInteraction : MonoBehaviour
             return;
         }
 
-        if (assistStarted)
-        {
-            return;
-        }
-        shadowSurfaceMotor.enabled=false;
+        
+        assistStarted = true;
+
+        playerInReach = false;
+
+        interactionZone.enabled = false;
+
+        shadowSurfaceMotor.enabled = false;
+
         allyAssistDirector.Play();
-        Debug.Log("ALLY ASSIST STARTED");
-    }
+            }
 
 
     private void OnTriggerEnter(Collider other)
