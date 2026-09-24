@@ -11,6 +11,7 @@ namespace Shadowed.Input
         public bool JumpRequested { get; private set; }
         public bool GrabRequest {get; private set; }
         public bool AttackRequest {get; private set; }
+        public bool SpecialRequest {get; private set; }
 
         private void Awake()
         {
@@ -34,6 +35,10 @@ namespace Shadowed.Input
             if(inputActions.Player.Grab.WasPressedThisFrame())
             {
                 GrabRequest = true;
+            }
+             if(inputActions.Player.Special.WasPressedThisFrame())
+            {
+                SpecialRequest = true;
             }
 
             if (inputActions.Player.Jump.WasPressedThisFrame())
@@ -72,6 +77,16 @@ namespace Shadowed.Input
             if (AttackRequest)
             {
                 AttackRequest = false;
+                return true;
+            }
+
+            return false;
+        }
+         public bool ConsumeSpecialRequest()
+        {
+            if (SpecialRequest)
+            {
+                SpecialRequest = false;
                 return true;
             }
 

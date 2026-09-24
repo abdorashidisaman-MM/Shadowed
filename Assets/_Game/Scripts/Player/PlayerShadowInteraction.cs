@@ -23,6 +23,7 @@ public class PlayerShadowInteraction : MonoBehaviour
     private  ShadowRange targetShadow;
     public  ShadowRange equippedShadow {get; private set;}
     private Vector3 attackAim;
+    private bool normalAttackAllowed;
 
     private void Awake()
     {
@@ -182,6 +183,8 @@ public class PlayerShadowInteraction : MonoBehaviour
     }
      private void AttackHandle()
         {
+            if(!normalAttackAllowed)
+             return;
             if (!inputReader.ConsumeAttackRequest())
                 return;
 
@@ -192,6 +195,7 @@ public class PlayerShadowInteraction : MonoBehaviour
         }
     private void Attack()
     {
+        
         
         {
             
@@ -205,5 +209,14 @@ public class PlayerShadowInteraction : MonoBehaviour
     {
         ClearTarget();
         enabled=false;
+    }
+    public void ConsumeEquippedShadow()
+    {
+        if(equippedShadow==null)
+        return;
+        equippedShadow.enabled=false;
+        equippedShadow=null;
+        
+        
     }
 }

@@ -143,6 +143,16 @@ namespace Shadowed.Input
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbf978f1-a522-498c-a2fd-290188f3c8bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -266,6 +276,17 @@ namespace Shadowed.Input
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3adfe53d-36ec-49b0-a518-ea65abb6613a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -279,6 +300,7 @@ namespace Shadowed.Input
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
             m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
         }
 
         ~@GameInputActions()
@@ -364,6 +386,7 @@ namespace Shadowed.Input
         private readonly InputAction m_Player_Aim;
         private readonly InputAction m_Player_Grab;
         private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_Special;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -395,6 +418,10 @@ namespace Shadowed.Input
             /// Provides access to the underlying input action "Player/Attack".
             /// </summary>
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Special".
+            /// </summary>
+            public InputAction @Special => m_Wrapper.m_Player_Special;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -436,6 +463,9 @@ namespace Shadowed.Input
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Special.started += instance.OnSpecial;
+                @Special.performed += instance.OnSpecial;
+                @Special.canceled += instance.OnSpecial;
             }
 
             /// <summary>
@@ -462,6 +492,9 @@ namespace Shadowed.Input
                 @Attack.started -= instance.OnAttack;
                 @Attack.performed -= instance.OnAttack;
                 @Attack.canceled -= instance.OnAttack;
+                @Special.started -= instance.OnSpecial;
+                @Special.performed -= instance.OnSpecial;
+                @Special.canceled -= instance.OnSpecial;
             }
 
             /// <summary>
@@ -537,6 +570,13 @@ namespace Shadowed.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnAttack(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Special" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpecial(InputAction.CallbackContext context);
         }
     }
 }
