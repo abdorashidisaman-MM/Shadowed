@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Shadowed.Input;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(PlayerInputReader))]
 public class PlayerShadowInteraction : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerShadowInteraction : MonoBehaviour
     private readonly List<ShadowRange> nearbyShadows = new List<ShadowRange>();
 
     public IReadOnlyList<ShadowRange> NearbyShadows => nearbyShadows;
+    public event Action<ShadowRange> OnShadowEquipped;
 
     private PlayerInputReader inputReader;
     private PlayerHealth playerHealth;
@@ -21,6 +23,7 @@ public class PlayerShadowInteraction : MonoBehaviour
     private  ShadowRange targetShadow;
     public  ShadowRange equippedShadow {get; private set;}
     private Vector3 attackAim;
+    private bool normalAttackAllowed;
 
     private void Awake()
     {
@@ -170,6 +173,7 @@ public class PlayerShadowInteraction : MonoBehaviour
         {
         equippedShadow=shadow;
         equippedShadow.Take();
+        OnShadowEquipped?.Invoke(equippedShadow);
         Debug.Log("Equipped Shadow : " + equippedShadow);
         }
         else
@@ -179,16 +183,23 @@ public class PlayerShadowInteraction : MonoBehaviour
     }
      private void AttackHandle()
         {
+            if(!normalAttackAllowed)
+            {
+             return;
+            }
             if (!inputReader.ConsumeAttackRequest())
+            {
                 return;
-
+            }
             if(equippedShadow!=null)
             {
+                Debug.Log("3 should happen");
                 Attack();
             }
         }
     private void Attack()
     {
+        
         
         {
             
@@ -202,5 +213,18 @@ public class PlayerShadowInteraction : MonoBehaviour
     {
         ClearTarget();
         enabled=false;
+    }
+    public void ConsumeEquippedShadow()
+    {
+        if(equippedShadow==null)
+        return;
+        equippedShadow.enabled=false;
+        equippedShadow=null;
+        
+        
+    }
+    public void NormalAttackEnabler()
+    {
+        normalAttackAllowed=true;
     }
 }

@@ -47,7 +47,7 @@ namespace Shadowed.Player
         }
         private void ReadInput()
         {
-            moveInput = inputReader.MoveInput;
+           // moveInput = inputReader.MoveInput;
            
 
             if (inputReader.ConsumeJumpRequest())

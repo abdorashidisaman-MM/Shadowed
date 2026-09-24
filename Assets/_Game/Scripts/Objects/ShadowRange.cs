@@ -5,8 +5,8 @@ public class ShadowRange : MonoBehaviour
 {
     [SerializeField] private Color normalLineColor = Color.white;
     [SerializeField] private Color targetedLineColor = Color.yellow;
-    [SerializeField] private BoxCollider interactionCollider;
-    [SerializeField] private BoxCollider projectileCollider;
+    [SerializeField] private Collider interactionCollider;
+    [SerializeField] private Collider projectileCollider;
     [SerializeField] private float fadeDuration = 1f;
     private Color color;
     private MeshRenderer shadowRenderer;
@@ -69,9 +69,13 @@ public class ShadowRange : MonoBehaviour
     if (other.gameObject.layer != playerLayerIndex)
         return;
 
-    if (other.TryGetComponent<PlayerShadowInteraction>(out interaction))
-    {
-        playerTransform = other.transform;
+    PlayerShadowInteraction foundInteraction =
+    other.GetComponentInParent<PlayerShadowInteraction>();
+
+if (foundInteraction != null)
+{
+    interaction = foundInteraction;
+    playerTransform = foundInteraction.transform;
 
         if (connectionLine != null)
         {
@@ -89,7 +93,10 @@ private void OnTriggerExit(Collider other)
     if (other.gameObject.layer != playerLayerIndex)
         return;
 
-    if (other.TryGetComponent<PlayerShadowInteraction>(out var exitInteraction))
+    PlayerShadowInteraction exitInteraction =
+    other.GetComponentInParent<PlayerShadowInteraction>();
+
+    if (exitInteraction != null)
     {
         exitInteraction.RemoveShadow(this);
     }
@@ -200,5 +207,7 @@ private void OnTriggerExit(Collider other)
         }
         Destroy(gameObject);
     }
+    
 }
+
 

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2175240585342915857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.75}
+  m_LocalPosition: {x: 0.11, y: 0, z: -5.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,7 +167,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6045146304780556912}
   - component: {fileID: 4991829841705856296}
-  - component: {fileID: 2812003262835361238}
   m_Layer: 7
   m_Name: DetectionRange
   m_TagString: Untagged
@@ -211,19 +210,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2812003262835361238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3171480313762360789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73c61d11264ae534bb45965f37aee55d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDetection
-  visionOrigin: {fileID: 3674444977942981787}
 --- !u!1 &3560959516646177050
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +345,6 @@ GameObject:
   m_Component:
   - component: {fileID: 283127000226834261}
   - component: {fileID: 3412344185560596704}
-  - component: {fileID: 3961833548532529261}
   m_Layer: 7
   m_Name: Attack Range
   m_TagString: Untagged
@@ -403,18 +388,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3961833548532529261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6486992407278211988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13373ea0d66ae814c8e46b2075868819, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackRange
 --- !u!1 &9053045286791942695
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9053045286791942695}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83163a5d9857c474c8bdf92deb052359, type: 3}
   m_Name: 
