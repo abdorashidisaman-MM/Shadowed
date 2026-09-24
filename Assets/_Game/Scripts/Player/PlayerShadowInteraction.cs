@@ -184,12 +184,16 @@ public class PlayerShadowInteraction : MonoBehaviour
      private void AttackHandle()
         {
             if(!normalAttackAllowed)
+            {
              return;
+            }
             if (!inputReader.ConsumeAttackRequest())
+            {
                 return;
-
+            }
             if(equippedShadow!=null)
             {
+                Debug.Log("3 should happen");
                 Attack();
             }
         }
@@ -218,5 +222,9 @@ public class PlayerShadowInteraction : MonoBehaviour
         equippedShadow=null;
         
         
+    }
+    public void NormalAttackEnabler()
+    {
+        normalAttackAllowed=true;
     }
 }

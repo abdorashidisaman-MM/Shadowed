@@ -107,7 +107,7 @@ public class AttackLanding : MonoBehaviour
         shadowSurfaceMotor.AttachToSurface(
             landingSurface
         );
-
+        OnDisable();
         secondSoldierDirector.Play();
 
     }
