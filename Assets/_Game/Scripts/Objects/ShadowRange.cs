@@ -8,6 +8,10 @@ public class ShadowRange : MonoBehaviour
     [SerializeField] private Collider interactionCollider;
     [SerializeField] private Collider projectileCollider;
     [SerializeField] private float fadeDuration = 1f;
+    
+   
+
+    
     private Color color;
     private MeshRenderer shadowRenderer;
     public string ShadowName;
@@ -19,6 +23,9 @@ public class ShadowRange : MonoBehaviour
     private Rigidbody shadowRigidBody;
     private int playerLayerIndex;
     private int environmentLayerIndex;
+    [SerializeField]
+    private WeaponAnimation weaponVisuals;
+    
     
     private enum ShadowState
     {
@@ -42,6 +49,7 @@ public class ShadowRange : MonoBehaviour
         environmentLayerIndex=LayerMask.NameToLayer("Environment");
         connectionLine = GetComponent<LineRenderer>();
         currentState=ShadowState.World;
+        
         if (connectionLine != null)
         {
             connectionLine.positionCount = 2;
@@ -144,13 +152,16 @@ private void OnTriggerExit(Collider other)
         {
             if(interaction.equippedShadow==this)
             {
+                weaponVisuals.WeaponAvailability();
             currentState=ShadowState.Equipped;
             interactionCollider.enabled = false;
             projectileCollider.enabled = false;
             connectionLine.enabled=false;
             transform.SetParent(interaction.transform);
             transform.localPosition = Vector3.zero;
+            
             gameObject.SetActive(false);
+            
             }
         }
     public void Throw(Vector3 aim,float speed)

@@ -21,6 +21,8 @@ public class ShadowSurfaceMotor : MonoBehaviour
 
     [SerializeField]
     private LayerMask surfaceMask;
+    [SerializeField]
+    private GameObject playerVisuals;
 
 
     private PlayerInputReader playerInput;
@@ -30,6 +32,13 @@ public class ShadowSurfaceMotor : MonoBehaviour
     private float verticalVelocity;
 
     private bool isSupported;
+    public bool IsSupported => isSupported;
+
+    public bool IsAirborne =>
+        currentSurface != null && !isSupported;
+
+    public float VerticalVelocity =>
+        verticalVelocity;
 
 
     private void Awake()
@@ -218,7 +227,14 @@ public class ShadowSurfaceMotor : MonoBehaviour
         {
             return;
         }
-
+        if(horizontalInput<0)
+        {
+            playerVisuals.transform.eulerAngles=new Vector3(playerVisuals.transform.rotation.x,180,playerVisuals.transform.rotation.z);
+        }
+        if(horizontalInput>0)
+        {
+            playerVisuals.transform.eulerAngles=new Vector3(playerVisuals.transform.rotation.x,0,playerVisuals.transform.rotation.z);
+        }
 
         Vector3 horizontalStep =
             currentSurface.Right *

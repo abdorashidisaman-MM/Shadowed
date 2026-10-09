@@ -6,6 +6,7 @@ public class AllyHandInteraction : MonoBehaviour
 {
     [SerializeField] private PlayableDirector allyAssistDirector;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    
     private Collider interactionZone;
 
     private bool assistStarted;
@@ -13,6 +14,8 @@ public class AllyHandInteraction : MonoBehaviour
 
     private bool playerInReach;
     private int playerLayer;
+    
+   
 
 
     private void Awake()
@@ -54,7 +57,10 @@ public class AllyHandInteraction : MonoBehaviour
         shadowSurfaceMotor.enabled = false;
 
         allyAssistDirector.Play();
-            }
+      
+
+            
+    }
 
 
     private void OnTriggerEnter(Collider other)

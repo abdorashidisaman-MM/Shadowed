@@ -25,6 +25,8 @@ public class PlayerShadowInteraction : MonoBehaviour
     private Vector3 attackAim;
     private bool normalAttackAllowed;
 
+     
+
     private void Awake()
     {
         inputReader = GetComponent<PlayerInputReader>();
@@ -171,10 +173,12 @@ public class PlayerShadowInteraction : MonoBehaviour
     {
         if(equippedShadow==null)
         {
+           
         equippedShadow=shadow;
         equippedShadow.Take();
         OnShadowEquipped?.Invoke(equippedShadow);
         Debug.Log("Equipped Shadow : " + equippedShadow);
+        
         }
         else
         {
