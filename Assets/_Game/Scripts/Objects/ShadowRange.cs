@@ -159,8 +159,8 @@ private void OnTriggerExit(Collider other)
             connectionLine.enabled=false;
             transform.SetParent(interaction.transform);
             transform.localPosition = Vector3.zero;
-            
             gameObject.SetActive(false);
+            
             
             }
         }

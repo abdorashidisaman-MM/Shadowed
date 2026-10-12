@@ -1,0 +1,671 @@
+fileFormatVersion: 2
+guid: 003aeb34796e2ec42b81c95f96b19210
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 368
+        width: 79
+        height: 264
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab083b8a758cc3f4bbd7189b2b426524
+      internalID: -2020853088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 340
+        width: 63
+        height: 292
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7bd0ec59a0a86b4eb16d76150432476
+      internalID: -2004082200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 336
+        width: 55
+        height: 296
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9906ffb58c3ab840908e77f867fe5dd
+      internalID: 740406487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 287
+        width: 44
+        height: 345
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5128ae161f03df44afbef589bb59832
+      internalID: 2123987817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 251
+        width: 46
+        height: 381
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a384704d8a8754f93b87fa1d305361
+      internalID: -247769240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 219
+        width: 44
+        height: 413
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c7549ffb1a9a146a556fa88acf6668
+      internalID: -897577686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 202
+        width: 39
+        height: 430
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8662a1ebf7941434c88b039d6367369e
+      internalID: 904177069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 184
+        width: 45
+        height: 448
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343ac83f88d567843b6f954b0112a6ce
+      internalID: 1817571648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 160
+        width: 55
+        height: 472
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c3c9ca83be582940b8700c186398fd7
+      internalID: -1483610797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 148
+        width: 50
+        height: 484
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b682059ad87f8f46b9a2b048da39b2c
+      internalID: 644024668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 163
+        width: 53
+        height: 469
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a09174237d5e4d4d9ccaf2200acaab8
+      internalID: 2025233838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 147
+        width: 63
+        height: 485
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3787a818191934a448fa2458c79ae961
+      internalID: 737052286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 154
+        width: 75
+        height: 478
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a99e6c3aa52c84eac5eeff5398074f
+      internalID: 1521570124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 158
+        width: 63
+        height: 473
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ede435fced879194c8d02c6e09ea7aab
+      internalID: -106755532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 158
+        width: 65
+        height: 474
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53ee6c3224e607a4480e8d4c224c2d93
+      internalID: 1103061781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 117
+        width: 72
+        height: 515
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46cadbba051ba5a4f9521bcca8c49baa
+      internalID: 909753061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 106
+        width: 76
+        height: 525
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd69c559e5ba55b4e96f94b5ff64894b
+      internalID: -1276328930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 107
+        width: 79
+        height: 524
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d084c02d4c8c64aacffbef46ed7e10
+      internalID: 1403594896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 107
+        width: 83
+        height: 524
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff16295c04b7ba47b5fc80d5019e6f8
+      internalID: 1994031712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 136
+        width: 83
+        height: 496
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75ff3b84f7334a941ae3532d8d69e43d
+      internalID: 82929849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 127
+        width: 91
+        height: 504
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725d8b355682fb84492d342604657c91
+      internalID: 202343082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 99
+        width: 92
+        height: 532
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 92, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38755d2c8c518784c8402d4de22fae2e
+      internalID: 189797325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 102
+        width: 103
+        height: 529
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfa6119cb7b8a324bbe3dafc39c64a41
+      internalID: 73528611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flowing Strand to Hanging Knot Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 2029
+        y: 100
+        width: 126
+        height: 531
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cc0e4c4662aa154db3d3b33da2735a3
+      internalID: -1832379335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e9b489e0f3e38bb448f3db97d1f6a759
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":1.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":2,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Flowing Strand to Hanging Knot Sprite Sheet_0: -2020853088
+      Flowing Strand to Hanging Knot Sprite Sheet_1: -2004082200
+      Flowing Strand to Hanging Knot Sprite Sheet_10: 2025233838
+      Flowing Strand to Hanging Knot Sprite Sheet_11: 737052286
+      Flowing Strand to Hanging Knot Sprite Sheet_12: 1521570124
+      Flowing Strand to Hanging Knot Sprite Sheet_13: -106755532
+      Flowing Strand to Hanging Knot Sprite Sheet_14: 1103061781
+      Flowing Strand to Hanging Knot Sprite Sheet_15: 909753061
+      Flowing Strand to Hanging Knot Sprite Sheet_16: -1276328930
+      Flowing Strand to Hanging Knot Sprite Sheet_17: 1403594896
+      Flowing Strand to Hanging Knot Sprite Sheet_18: 1994031712
+      Flowing Strand to Hanging Knot Sprite Sheet_19: 82929849
+      Flowing Strand to Hanging Knot Sprite Sheet_2: 740406487
+      Flowing Strand to Hanging Knot Sprite Sheet_20: 202343082
+      Flowing Strand to Hanging Knot Sprite Sheet_21: 189797325
+      Flowing Strand to Hanging Knot Sprite Sheet_22: 73528611
+      Flowing Strand to Hanging Knot Sprite Sheet_23: -1832379335
+      Flowing Strand to Hanging Knot Sprite Sheet_3: 2123987817
+      Flowing Strand to Hanging Knot Sprite Sheet_4: -247769240
+      Flowing Strand to Hanging Knot Sprite Sheet_5: -897577686
+      Flowing Strand to Hanging Knot Sprite Sheet_6: 904177069
+      Flowing Strand to Hanging Knot Sprite Sheet_7: 1817571648
+      Flowing Strand to Hanging Knot Sprite Sheet_8: -1483610797
+      Flowing Strand to Hanging Knot Sprite Sheet_9: 644024668
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

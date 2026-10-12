@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponAnimation : MonoBehaviour
 {
-[SerializeField] private GameObject player;
+[SerializeField] private GameObject Hand;
 private bool weaponGrabed=true;
 private float minimumdistance=0.01f;
     void Update()
@@ -10,25 +10,30 @@ private float minimumdistance=0.01f;
         
         if(weaponGrabed)
         return;
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
-     if(Vector3.Distance(transform.position,player.transform.position)>=minimumdistance)
+        Debug.Log(Vector3.Distance(transform.position, Hand.transform.position));
+     if(Vector3.Distance(transform.position,Hand.transform.position)>=minimumdistance)
         {
             WeaponGrab();
         }
         else
         {
             weaponGrabed=true;
-            gameObject.SetActive(false);
+            transform.SetParent(Hand.transform);
+            transform.localPosition=Vector3.zero;         
         }
     }
     public void WeaponGrab()
     {
         Debug.Log("it started");
-        transform.position=Vector3.MoveTowards(transform.position,player.transform.position,30f*Time.deltaTime);
-        transform.localEulerAngles=Vector3.RotateTowards(transform.position,player.transform.position,20f*Time.deltaTime,0);
+        transform.position=Vector3.MoveTowards(transform.position,Hand.transform.position,30f*Time.deltaTime);
+        transform.localEulerAngles=Vector3.RotateTowards(transform.position,Hand.transform.position,30f*Time.deltaTime,0);
     }
     public void WeaponAvailability()
     {
         weaponGrabed=false;
+    }
+    public void WeaponConsuption()
+    {
+        gameObject.SetActive(false);
     }
 }
