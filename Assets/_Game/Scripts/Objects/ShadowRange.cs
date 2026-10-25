@@ -23,8 +23,7 @@ public class ShadowRange : MonoBehaviour
     private Rigidbody shadowRigidBody;
     private int playerLayerIndex;
     private int environmentLayerIndex;
-    [SerializeField]
-    private WeaponAnimation weaponVisuals;
+    
     
     
     private enum ShadowState
@@ -149,21 +148,18 @@ private void OnTriggerExit(Collider other)
     }
 }
     public void Take()
-        {
-            if(interaction.equippedShadow==this)
-            {
-                weaponVisuals.WeaponAvailability();
-            currentState=ShadowState.Equipped;
-            interactionCollider.enabled = false;
-            projectileCollider.enabled = false;
-            connectionLine.enabled=false;
-            transform.SetParent(interaction.transform);
-            transform.localPosition = Vector3.zero;
-            gameObject.SetActive(false);
-            
-            
-            }
-        }
+{
+    if (interaction.equippedShadow == this)
+    {
+        currentState = ShadowState.Equipped;
+
+        interactionCollider.enabled = false;
+        projectileCollider.enabled = false;
+        connectionLine.enabled = false;
+
+        gameObject.SetActive(false);
+    }
+}
     public void Throw(Vector3 aim,float speed)
     {
      currentState=ShadowState.Thrown;
@@ -171,7 +167,9 @@ private void OnTriggerExit(Collider other)
      gameObject.SetActive(true);
      projectileCollider.enabled = true;
      shadowRigidBody.isKinematic=false;
+     gameObject.transform.eulerAngles=Vector3.zero;
      shadowRigidBody.linearVelocity=aim*speed;
+
     }
     public void HandleProjectileHit(Collider other)
         {

@@ -7,8 +7,11 @@ public class HairAttack : MonoBehaviour
     [SerializeField] private PlayerInputReader playerInputReader;
     [SerializeField] private EnemyShadow Enemy2;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    [SerializeField] private Animator hairVisuals;
     private float damageAmount=100f;
     private bool hairAttackReady;
+    private static readonly int HairAnimation =
+        Animator.StringToHash("Hair");
     void Update()
     {
         if(!hairAttackReady)
@@ -20,6 +23,8 @@ public class HairAttack : MonoBehaviour
     public void SpecialAttackReady()
     {
     hairAttackReady=true;
+    hairVisuals.SetTrigger(HairAnimation);
+  
     }
     public void StartHairExecution()
     {

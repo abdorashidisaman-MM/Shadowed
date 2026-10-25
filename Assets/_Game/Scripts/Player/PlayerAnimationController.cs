@@ -12,6 +12,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private ShadowSurfaceMotor motor;
     private PlayerInputReader playerInput;
+    private PlayerShadowInteraction shadowInteraction;
+    private ShadowSurface shadowSurface;
 
     private bool wasAirborne;
 
@@ -26,6 +28,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private static readonly int LandHash =
         Animator.StringToHash("Land");
+        [SerializeField] private Transform characterFacing;
 
 
     private void Awake()
@@ -35,8 +38,12 @@ public class PlayerAnimationController : MonoBehaviour
 
         playerInput =
             GetComponent<PlayerInputReader>();
+        shadowInteraction =
+            GetComponent<PlayerShadowInteraction>();
+        shadowSurface =
+            GetComponent<ShadowSurface>();
     }
-
+    
 
     private void LateUpdate()
     {
@@ -72,10 +79,30 @@ public class PlayerAnimationController : MonoBehaviour
 
         wasAirborne =
             airborne;
+            float horizontalInput = playerInput.MoveInput.x;
+
+if (horizontalInput > 0.01f)
+{
+    characterFacing.localScale =
+        new Vector3(1f, 1f, 1f);
+}
+else if (horizontalInput < -0.01f)
+{
+    characterFacing.localScale =
+        new Vector3(-1f, 1f, 1f);
+}
     }
    public void ChangeRootPosition()
     {
         gameObject.transform.position=position.position;
         riggedCharacter.transform.localPosition = new Vector3(0.86f,-1.97f,0);
+    }
+    public void RetrieveControl()
+    {
+        motor.enabled=true;
+        playerInput.enabled=true;
+        shadowInteraction.enabled=true;
+        
+        
     }
 }

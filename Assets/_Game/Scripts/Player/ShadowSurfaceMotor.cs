@@ -10,19 +10,14 @@ public class ShadowSurfaceMotor : MonoBehaviour
     [SerializeField] private float jumpSpeed = 7f;
     [SerializeField] private float gravity = -20f;
 
+    [Header("Landing")]
+    [SerializeField] private float feetOffset = 2f;
+
     [Header("Surface")]
     [SerializeField] private float surfaceOffset = 0.5f;
-
-    [SerializeField]
-    private float initialSurfaceCheckDistance = 2f;
-
-    [SerializeField]
-    private float cornerInset = 0.1f;
-
-    [SerializeField]
-    private LayerMask surfaceMask;
-    [SerializeField]
-    private GameObject playerVisuals;
+    [SerializeField] private float initialSurfaceCheckDistance = 2f;
+    [SerializeField] private float cornerInset = 0.1f;
+    [SerializeField] private LayerMask surfaceMask;
 
 
     private PlayerInputReader playerInput;
@@ -32,10 +27,16 @@ public class ShadowSurfaceMotor : MonoBehaviour
     private float verticalVelocity;
 
     private bool isSupported;
-    public bool IsSupported => isSupported;
+
+
+    public bool IsSupported =>
+        isSupported;
+
 
     public bool IsAirborne =>
-        currentSurface != null && !isSupported;
+        currentSurface != null &&
+        !isSupported;
+
 
     public float VerticalVelocity =>
         verticalVelocity;
@@ -183,6 +184,34 @@ public class ShadowSurfaceMotor : MonoBehaviour
             verticalStep;
 
 
+        // -----------------------------
+        // LANDING CHECK
+        // -----------------------------
+
+        if (verticalVelocity < 0f)
+        {
+            if (currentSurface.TrySnapToBottom(
+                desiredPosition,
+                surfaceOffset,
+                feetOffset,
+                out Vector3 landingPosition))
+            {
+                transform.position =
+                    landingPosition;
+
+                verticalVelocity = 0f;
+
+                isSupported = true;
+
+                return;
+            }
+        }
+
+
+        // -----------------------------
+        // STILL ON CURRENT WALL
+        // -----------------------------
+
         if (currentSurface.TrySnapPosition(
             desiredPosition,
             surfaceOffset,
@@ -199,7 +228,7 @@ public class ShadowSurfaceMotor : MonoBehaviour
 
 
         // -----------------------------
-        // BOTTOM EDGE
+        // BOTTOM EDGE FALLBACK
         // -----------------------------
 
         if (verticalVelocity < 0f)
@@ -227,14 +256,8 @@ public class ShadowSurfaceMotor : MonoBehaviour
         {
             return;
         }
-        if(horizontalInput<0)
-        {
-            playerVisuals.transform.eulerAngles=new Vector3(playerVisuals.transform.rotation.x,180,playerVisuals.transform.rotation.z);
-        }
-        if(horizontalInput>0)
-        {
-            playerVisuals.transform.eulerAngles=new Vector3(playerVisuals.transform.rotation.x,0,playerVisuals.transform.rotation.z);
-        }
+        
+
 
         Vector3 horizontalStep =
             currentSurface.Right *
@@ -300,21 +323,27 @@ public class ShadowSurfaceMotor : MonoBehaviour
         transform.position =
             transitionPosition;
     }
-   public void AttachToSurface(ShadowSurface surface)
+
+
+    public void AttachToSurface(
+        ShadowSurface surface)
     {
-        
-         if (surface.TrySnapPosition(
+        if (surface.TrySnapPosition(
             transform.position,
             surfaceOffset,
             out Vector3 snappedPosition))
         {
-            currentSurface=surface;
+            currentSurface =
+                surface;
+
             transform.position =
                 snappedPosition;
-        verticalVelocity=0;
-        isSupported=true;
 
+            verticalVelocity =
+                0f;
 
-    }
+            isSupported =
+                true;
+        }
     }
 }

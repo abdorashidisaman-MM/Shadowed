@@ -7,6 +7,7 @@ public class ShadowTraversal : MonoBehaviour
     [SerializeField] private float minimumdistance=0.1f;
     [SerializeField] private GameObject allyReleasePoint;
     private GameObject currentTarget;
+    [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
     private bool firstDistanceRiched=true;
     private bool secondDistanceRiched=true;
     void Update()
@@ -34,6 +35,7 @@ public class ShadowTraversal : MonoBehaviour
             {
                 secondDistanceRiched=true;
                 currentTarget=null;
+                shadowSurfaceMotor.enabled=false;
                 return;
             }
 
@@ -41,6 +43,7 @@ public class ShadowTraversal : MonoBehaviour
     }
     public void Travel(GameObject target)
     {
+        
         transform.position=  Vector3.MoveTowards(transform.position,target.transform.position,moveSpeed*Time.deltaTime);
         transform.right= Vector3.RotateTowards(transform.right,target.transform.position-transform.position,1f*Time.deltaTime,0);
     }
