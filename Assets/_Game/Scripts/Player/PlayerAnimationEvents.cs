@@ -5,10 +5,21 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField]
     private PlayerShadowInteraction playerShadowInteraction;
 
+    // Animation Event: Player_WeaponThrow release frame.
     public void ReleaseWeapon()
     {
-        Debug.Log("=== THROW EVENT FIRED ===");
+        if (playerShadowInteraction != null)
+        {
+            playerShadowInteraction.ReleaseWeapon();
+        }
+    }
 
-        playerShadowInteraction.ReleaseWeapon();
+    // Animation Event: Player_WeaponTake, frame where the hand reaches the shadow.
+    public void GrabContact()
+    {
+        if (playerShadowInteraction != null)
+        {
+            playerShadowInteraction.OnGrabContact();
+        }
     }
 }

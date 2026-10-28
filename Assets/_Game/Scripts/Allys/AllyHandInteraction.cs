@@ -86,10 +86,6 @@ public class AllyHandInteraction : MonoBehaviour
 
 
         playerInReach = true;
-
-        Debug.Log(
-            "player is in the zone"
-        );
     }
 
 
@@ -103,9 +99,5 @@ public class AllyHandInteraction : MonoBehaviour
 
         playerInReach = false;
         playerInputReader = null;
-
-        Debug.Log(
-            "player is out"
-        );
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 public class WeaponAnimation : MonoBehaviour
 {
 [SerializeField] private GameObject Hand;
+[SerializeField] private PlayerShadowInteraction playerInteraction;
+[SerializeField] private ShadowRange shadowRange;
 private bool weaponGrabed=true;
 private float minimumdistance=0.01f;
     void Update()
@@ -18,8 +20,8 @@ private float minimumdistance=0.01f;
         else
         {
             weaponGrabed=true;
-            transform.SetParent(Hand.transform);
-            transform.localPosition=Vector3.zero;         
+            playerInteraction.WeaponReachedHand(shadowRange);
+                    
         }
     }
     public void WeaponGrab()

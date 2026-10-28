@@ -8,6 +8,15 @@ public class ShadowRange : MonoBehaviour
     [SerializeField] private Collider interactionCollider;
     [SerializeField] private Collider projectileCollider;
     [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private WeaponAnimation weaponAnimation;
+    [SerializeField] private SpriteRenderer weaponSpriteRenderer;
+    public Sprite WeaponSprite
+{
+    get
+    {
+        return weaponSpriteRenderer.sprite;
+    }
+}
     
    
 
@@ -40,6 +49,19 @@ public class ShadowRange : MonoBehaviour
     
     
 
+    [Tooltip("A thrown weapon that hits nothing is removed after this many seconds.")]
+    [SerializeField] private float maxFlightTime = 4f;
+
+    private float throwTime;
+    private bool isTargeted;
+
+    // True while the shadow is lying in the world and can be grabbed.
+    public bool IsGrabbable => currentState == ShadowState.World;
+
+    // True while the shadow is flying and allowed to deal damage.
+    public bool IsThrown => currentState == ShadowState.Thrown;
+
+
     private void Awake()
     {
         shadowRenderer=GetComponent<MeshRenderer>();
@@ -53,19 +75,23 @@ public class ShadowRange : MonoBehaviour
         {
             connectionLine.positionCount = 2;
             connectionLine.enabled = false;
+            lineMaterial = connectionLine.material;
         }
-        lineMaterial=connectionLine.material;
-        
     }
 
     private void Update()
     {
-        if (connectionLine != null && playerTransform != null)
+        if (connectionLine != null && connectionLine.enabled && playerTransform != null)
         {
             connectionLine.SetPosition(0, transform.position);
             connectionLine.SetPosition(1, playerTransform.position);
         }
-        
+
+        if (currentState == ShadowState.Thrown &&
+            Time.time - throwTime >= maxFlightTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
    private void OnTriggerEnter(Collider other)
@@ -137,71 +163,123 @@ private void OnTriggerExit(Collider other)
         playerTransform = null;
     }
     public void SetTargeted(bool targeted)
-{
-    if (targeted)
     {
-        lineMaterial.color = targetedLineColor;
+        if (isTargeted == targeted)
+            return;
+
+        isTargeted = targeted;
+
+        if (lineMaterial != null)
+        {
+            lineMaterial.color = targeted ? targetedLineColor : normalLineColor;
+        }
     }
-    else
+
+    // Gameplay ownership: called the moment the player grabs this shadow.
+    // The world visual stays until HideWorldVisual() (grab-contact frame).
+    public void Take(PlayerShadowInteraction owner)
     {
-        lineMaterial.color = normalLineColor;
-    }
-}
-    public void Take()
-{
-    if (interaction.equippedShadow == this)
-    {
+        if (owner == null || owner.equippedShadow != this)
+            return;
+
         currentState = ShadowState.Equipped;
+        weaponAnimation.WeaponAvailability();
 
-        interactionCollider.enabled = false;
-        projectileCollider.enabled = false;
-        connectionLine.enabled = false;
+        if (interactionCollider != null) interactionCollider.enabled = false;
+        if (projectileCollider != null) projectileCollider.enabled = false;
+        if (connectionLine != null) connectionLine.enabled = false;
 
-        gameObject.SetActive(false);
+        isTargeted = false;
+        owner.RemoveShadow(this);
+
+        interaction = null;
+        playerTransform = null;
     }
-}
+
+    // Visual: the shadow leaves the world (it is now drawn in the hand).
+    public void HideWorldVisual()
+    {
+        if (currentState == ShadowState.Equipped && gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     public void Throw(Vector3 aim,float speed)
     {
-     currentState=ShadowState.Thrown;
-     transform.SetParent(null);
-     gameObject.SetActive(true);
-     projectileCollider.enabled = true;
-     shadowRigidBody.isKinematic=false;
-     gameObject.transform.eulerAngles=Vector3.zero;
-     shadowRigidBody.linearVelocity=aim*speed;
+        if (aim.sqrMagnitude < 0.0001f)
+            return;
 
-    }
-    public void HandleProjectileHit(Collider other)
+        currentState=ShadowState.Thrown;
+        throwTime = Time.time;
+        weaponSpriteRenderer.transform.localPosition = Vector3.zero;
+        gameObject.SetActive(true);
+        
+
+        if (shadowRigidBody != null)
         {
-            if (currentState != ShadowState.Thrown)
-              return;
-            if(other.TryGetComponent<IDamageable>(out _))
+            shadowRigidBody.position = transform.position;
+            shadowRigidBody.rotation = transform.rotation;
+            shadowRigidBody.interpolation = RigidbodyInterpolation.Interpolate;
+            shadowRigidBody.isKinematic=false;
+            shadowRigidBody.linearVelocity=aim.normalized*speed;
+        }
+
+        if (projectileCollider != null) projectileCollider.enabled = true;
+    }
+
+    // Called by ProjectileHitbox. Returns true if this hit was consumed
+    // (so the hitbox applies damage at most once per throw).
+    public bool HandleProjectileHit(Collider other)
+    {
+        if (currentState != ShadowState.Thrown)
+            return false;
+
+        if (other.TryGetComponent<IDamageable>(out _))
         {
             HandleDamageableHit();
+            return true;
         }
-        else if(other.gameObject.layer==environmentLayerIndex)
+
+        if (other.gameObject.layer == environmentLayerIndex)
         {
             HandleEnvironmentHit();
         }
-        }
+
+        return false;
+    }
+
     private void HandleDamageableHit()
     {
+        // Stop interacting immediately; Destroy is deferred to end of frame.
+        currentState = ShadowState.Stuck;
+        if (projectileCollider != null) projectileCollider.enabled = false;
         Destroy(gameObject);
     }
+
     private void HandleEnvironmentHit()
     {
-        projectileCollider.enabled = false;
+        if (projectileCollider != null) projectileCollider.enabled = false;
         currentState=ShadowState.Stuck;
-        if (!shadowRigidBody.isKinematic)
+        if (shadowRigidBody != null && !shadowRigidBody.isKinematic)
         {
             shadowRigidBody.linearVelocity = Vector3.zero;
             shadowRigidBody.isKinematic = true;
             StartCoroutine(EnvironmentDisappear());
         }
     }
+
     private IEnumerator EnvironmentDisappear()
     {
         yield return new WaitForSeconds(1f);
+
+        // The first weapon is a MeshRenderer, the final weapon is drawn by
+        // a child SpriteRenderer. Fade whichever exists.
+        SpriteRenderer sprite = shadowRenderer == null
+            ? GetComponentInChildren<SpriteRenderer>()
+            : null;
+        Material meshMaterial = shadowRenderer != null ? shadowRenderer.material : null;
+
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
@@ -209,9 +287,20 @@ private void OnTriggerExit(Collider other)
             elapsedTime += Time.deltaTime;
 
             float alpha = 1f - (elapsedTime / fadeDuration);
-            color = shadowRenderer.material.color;
-            color.a = alpha;
-            shadowRenderer.material.color = color;
+
+            if (meshMaterial != null)
+            {
+                color = meshMaterial.color;
+                color.a = alpha;
+                meshMaterial.color = color;
+            }
+            else if (sprite != null)
+            {
+                color = sprite.color;
+                color.a = alpha;
+                sprite.color = color;
+            }
+
             yield return null;
         }
         Destroy(gameObject);

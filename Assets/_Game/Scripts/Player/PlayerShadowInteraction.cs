@@ -16,7 +16,16 @@ public class PlayerShadowInteraction : MonoBehaviour
 
     [Header("Weapon Visual")]
     [SerializeField] private GameObject heldWeaponVisual;
-  
+    [SerializeField] private SpriteRenderer heldWeaponRenderer;
+
+    [Header("Safety")]
+    [Tooltip("If the grab-contact Animation Event does not arrive within this time, " +
+             "the held weapon visual is shown anyway.")]
+    [SerializeField] private float grabVisualFallbackDelay = 0.6f;
+    [Tooltip("If the ReleaseWeapon Animation Event does not arrive within this time " +
+             "(e.g. throw animation interrupted), the weapon is released anyway.")]
+    [SerializeField] private float throwReleaseFallbackDelay = 1.0f;
+    
 
 
     private readonly List<ShadowRange> nearbyShadows =
@@ -48,11 +57,18 @@ public class PlayerShadowInteraction : MonoBehaviour
 
     private bool normalAttackAllowed;
     private bool throwInProgress;
+    private float throwStartTime;
+
+    // Grab: gameplay ownership changes on input, the visual swap
+    // (world shadow -> hand) happens on the grab-contact frame.
+    private bool heldVisualPending;
+    private float equipTime;
 
 
     private static readonly int ThrowHash =
         Animator.StringToHash("Throw");
-        private static readonly int GrabHash =
+
+    private static readonly int GrabHash =
         Animator.StringToHash("Grab");
 
 
@@ -63,30 +79,42 @@ public class PlayerShadowInteraction : MonoBehaviour
 
         playerHealth =
             GetComponent<PlayerHealth>();
-foreach (AnimatorControllerParameter parameter in animator.parameters)
-{
-    Debug.Log(parameter.name + " - " + parameter.type);
-}
+
+        if (animator == null)
+        {
+            Debug.LogWarning(
+                "PlayerShadowInteraction: no Animator assigned, grab/throw animations will not play.",
+                this);
+        }
 
         // Player starts with empty hands.
         if (heldWeaponVisual != null)
         {
             heldWeaponVisual.SetActive(false);
         }
+    
     }
 
 
     private void OnEnable()
     {
-        playerHealth.OnDeath +=
-            PlayerDeath;
+        if (playerHealth != null)
+        {
+            playerHealth.OnDeath +=
+                PlayerDeath;
+        }
     }
 
 
     private void OnDisable()
     {
-        playerHealth.OnDeath -=
-            PlayerDeath;
+        if (playerHealth != null)
+        {
+            playerHealth.OnDeath -=
+                PlayerDeath;
+        }
+
+        ClearTarget();
     }
 
 
@@ -108,6 +136,23 @@ foreach (AnimatorControllerParameter parameter in animator.parameters)
 
         GrabHandle();
         AttackHandle();
+        UpdateSafetyFallbacks();
+    }
+
+
+    private void UpdateSafetyFallbacks()
+    {
+        if (heldVisualPending &&
+            Time.time - equipTime >= grabVisualFallbackDelay)
+        {
+            OnGrabContact();
+        }
+
+        if (throwInProgress &&
+            Time.time - throwStartTime >= throwReleaseFallbackDelay)
+        {
+            ReleaseWeapon();
+        }
     }
 
 
@@ -121,14 +166,17 @@ foreach (AnimatorControllerParameter parameter in animator.parameters)
             Mathf.Infinity;
 
 
-        if (targetShadow != null)
-        {
-            targetShadow.SetTargeted(false);
-        }
+        ShadowRange previousTarget =
+            targetShadow;
 
 
         bestScore = -1f;
         targetShadow = null;
+
+
+        // Drop stale entries (destroyed / disabled / already taken).
+        nearbyShadows.RemoveAll(
+            s => s == null || !s.isActiveAndEnabled || !s.IsGrabbable);
 
 
         foreach (ShadowRange shadow in nearbyShadows)
@@ -210,9 +258,17 @@ foreach (AnimatorControllerParameter parameter in animator.parameters)
         }
 
 
-        if (targetShadow != null)
+        if (previousTarget != targetShadow)
         {
-            targetShadow.SetTargeted(true);
+            if (previousTarget != null)
+            {
+                previousTarget.SetTargeted(false);
+            }
+
+            if (targetShadow != null)
+            {
+                targetShadow.SetTargeted(true);
+            }
         }
     }
 
@@ -267,62 +323,82 @@ foreach (AnimatorControllerParameter parameter in animator.parameters)
 
     private void GrabHandle()
     {
+        // Only claim the Grab press when this system can actually use it.
+        // Otherwise other Grab users (e.g. the ally hand) would randomly
+        // lose the press depending on script execution order.
+        if (targetShadow == null ||
+            equippedShadow != null ||
+            throwInProgress)
+            return;
+
+
         if (!inputReader.ConsumeGrabRequest())
             return;
 
 
-        if (targetShadow != null)
-        {
-            
-            Debug.Log("Animator: " + animator.name);
-Debug.Log("Controller: " + animator.runtimeAnimatorController.name);
-
-animator.SetTrigger(GrabHash);
-
-Debug.Log("Grab trigger sent");
-            EquipShadow(
-                targetShadow
-            );
-        }
+        EquipShadow(
+            targetShadow
+        );
     }
 
 
     private void EquipShadow(
         ShadowRange shadow)
     {
-        if (equippedShadow != null)
-        {
-            Debug.Log(
-                "A weapon is already equipped."
-            );
-
+        if (equippedShadow != null || shadow == null)
             return;
-        }
+
+
+        ShadowRange taken =
+            shadow;
+
+        ClearTarget();
 
 
         equippedShadow =
-            shadow;
+            taken;
 
 
-        equippedShadow.Take();
+        // Gameplay ownership changes immediately (no double grabs,
+        // shadow stops being targetable).
+        equippedShadow.Take(this);
 
 
-        // Show the visual weapon in player's hand.
-        if (heldWeaponVisual != null)
+        // Visual swap waits for the grab-contact frame of Player_WeaponTake.
+        heldVisualPending = true;
+        equipTime = Time.time;
+
+
+        if (animator != null)
         {
-            heldWeaponVisual.SetActive(true);
+            animator.SetTrigger(GrabHash);
         }
 
 
         OnShadowEquipped?.Invoke(
             equippedShadow
         );
+    }
 
 
-        Debug.Log(
-            "Equipped Shadow: " +
-            equippedShadow
-        );
+    // Animation Event (via PlayerAnimationEvents) on the frame the hand
+    // reaches the shadow in Player_WeaponTake. Also used as fallback.
+    public void OnGrabContact()
+    {
+        if (!heldVisualPending)
+            return;
+
+        heldVisualPending = false;
+
+        if (equippedShadow != null)
+        {
+            equippedShadow.HideWorldVisual();
+
+            if (heldWeaponVisual != null)
+            {
+                heldWeaponVisual.SetActive(true);
+            }
+        }
     }
 
 
@@ -330,52 +406,71 @@ Debug.Log("Grab trigger sent");
     // ATTACK
     // --------------------------------------------------
 
-    private void AttackHandle()
+private void AttackHandle()
+{
+    if (!normalAttackAllowed)
     {
-        if (!normalAttackAllowed)
-            return;
-
-
-        if (throwInProgress)
-            return;
-
-
-        if (!inputReader.ConsumeAttackRequest())
-            return;
-
-
-        if (equippedShadow == null)
-            return;
-
-       
-        // Remember the player's aim at the moment
-        // the attack button is pressed.
-        cachedAttackAim =
-            new Vector3(
-                aimDirection.x,
-                aimDirection.y,
-                0f
-            );
-
-
-        throwInProgress =
-            true;
-
-
-        // Start Player_WeaponThrow animation.
-        animator.SetTrigger(
-            ThrowHash
-        );
-         Debug.Log("ITs Working");
+        Debug.Log("ATTACK STOPPED: normalAttackAllowed false");
+        return;
     }
 
+    if (throwInProgress)
+    {
+        Debug.Log("ATTACK STOPPED: throw already in progress");
+        return;
+    }
 
-    // Called by the Animation Event
-    // on the exact release frame.
+    if (!inputReader.ConsumeAttackRequest())
+        return;
+
+    Debug.Log("=== ATTACK BUTTON PRESSED ===");
+
+    if (equippedShadow == null)
+    {
+        Debug.Log("ATTACK STOPPED: no equipped weapon");
+        return;
+    }
+
+    Debug.Log("Equipped weapon: " + equippedShadow.name);
+
+    if (aimDirection == Vector2.zero)
+    {
+        Debug.Log("ATTACK STOPPED: aimDirection is ZERO");
+        return;
+    }
+
+    Debug.Log("Aim: " + aimDirection);
+
+    cachedAttackAim = new Vector3(
+        aimDirection.x,
+        aimDirection.y,
+        0f
+    );
+
+    OnGrabContact();
+
+    throwInProgress = true;
+    throwStartTime = Time.time;
+
+    Debug.Log("THROW TRIGGER SENT");
+
+    if (animator != null)
+    {
+        animator.SetTrigger(ThrowHash);
+    }
+    else
+    {
+        Debug.Log("NO ANIMATOR - releasing immediately");
+        ReleaseWeapon();
+    }
+}
+
+
+    // Called by the Animation Event (through PlayerAnimationEvents)
+    // on the exact release frame of Player_WeaponThrow.
     public void ReleaseWeapon()
     {
-        Debug.Log("=== RELEASE WEAPON CALLED ===");
-        if (equippedShadow == null)
+        if (!throwInProgress || equippedShadow == null)
         {
             throwInProgress =
                 false;
@@ -391,12 +486,14 @@ Debug.Log("Grab trigger sent");
         }
 
 
-        // Put the REAL gameplay weapon at the hand. 
-        equippedShadow.transform.position =
-            throwOrigin.position;
+        // Put the REAL gameplay weapon at the hand.
+        if (throwOrigin != null)
+        {
+            equippedShadow.transform.position =
+                throwOrigin.position;
+        }
 
-         Debug.Log("Throw Aim: " + cachedAttackAim);
-         Debug.Log("Throw Origin: " + throwOrigin.position);
+
         // Launch it using the aim direction
         // saved when Attack was pressed.
         equippedShadow.Throw(
@@ -424,11 +521,16 @@ Debug.Log("Grab trigger sent");
             return;
 
 
+        heldVisualPending = false;
+
+
         if (heldWeaponVisual != null)
         {
             heldWeaponVisual.SetActive(false);
         }
 
+
+        equippedShadow.HideWorldVisual();
 
         equippedShadow.enabled =
             false;
@@ -451,6 +553,8 @@ Debug.Log("Grab trigger sent");
     {
         ClearTarget();
 
+        heldVisualPending = false;
+
 
         if (heldWeaponVisual != null)
         {
@@ -468,4 +572,24 @@ Debug.Log("Grab trigger sent");
         normalAttackAllowed =
             true;
     }
+    public void WeaponReachedHand(ShadowRange weapon)
+{
+    if (weapon == null)
+        return;
+
+    if (weapon != equippedShadow)
+        return;
+
+    if (heldWeaponRenderer != null)
+    {
+        heldWeaponRenderer.sprite = weapon.WeaponSprite;
+    }
+
+    if (heldWeaponVisual != null)
+    {
+        heldWeaponVisual.SetActive(true);
+    }
+
+    weapon.HideWorldVisual();
+}
 }

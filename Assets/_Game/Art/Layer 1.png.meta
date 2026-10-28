@@ -470,6 +470,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Layer 1_0
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 440
+        width: 103
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d99e827d37e5268498e0a77c69bebf77
+      internalID: -739920999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -500,6 +522,7 @@ TextureImporter:
       Front_Upper_Arm: 1450724549
       Head: 1551950898
       Hood: -2073049427
+      Layer 1_0: -739920999
       Layer 1_12: 572494816
       Layer 1_13: -121542651
       Layer 1_14: 131960543

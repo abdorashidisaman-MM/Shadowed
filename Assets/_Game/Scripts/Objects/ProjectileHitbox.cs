@@ -11,15 +11,16 @@ public class ProjectileHitbox : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        
-       
-            if (other.TryGetComponent<IDamageable>(out var damageable))
-            {
-                damageable.TakeDamage(attackDamage);
-                
-            }
-            fatherShadow.HandleProjectileHit(other);
-           
+        if (fatherShadow == null || !fatherShadow.IsThrown)
+            return;
+
+        // The shadow decides whether this contact counts (and stops
+        // being a projectile), so damage is applied at most once.
+        if (fatherShadow.HandleProjectileHit(other) &&
+            other.TryGetComponent<IDamageable>(out var damageable))
+        {
+            damageable.TakeDamage(attackDamage);
+        }
     }
 
 

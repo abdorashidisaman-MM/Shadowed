@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6386612150803110928}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -136,6 +136,7 @@ MonoBehaviour:
   fadeDuration: 1
   ShadowName: Cube1
   connectionLine: {fileID: 0}
+  maxFlightTime: 4
 --- !u!120 &264992025520689085
 LineRenderer:
   serializedVersion: 3
@@ -162,7 +163,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b265390a87ca0b94db30d2c86fcb4741, type: 2}
+  - {fileID: 2100000, guid: de6a9e02967161c4c9fe2a425b3d53d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -195,8 +196,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.084941864
-        value: 0.55454636
+        time: 0.06563568
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -272,7 +273,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &6960345211000525276
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c271e5dfd5a65743950065741357308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileHitbox
-  attackDamage: 10
+  attackDamage: 100
 --- !u!1 &8893709121306985944
 GameObject:
   m_ObjectHideFlags: 0

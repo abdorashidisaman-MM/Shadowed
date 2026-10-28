@@ -4,14 +4,25 @@ namespace Shadowed.Input
 {
     public class PlayerInputReader : MonoBehaviour
     {
+        [Header("Buffering")]
+        [Tooltip("How long (seconds) a button press stays available to be consumed. " +
+                 "Prevents presses made during cutscenes / disabled states from firing much later.")]
+        [SerializeField] private float requestBufferTime = 0.2f;
+
         private GameInputActions inputActions;
+
+        // Time at which each request was made. Negative = no pending request.
+        private float jumpRequestTime = -1f;
+        private float grabRequestTime = -1f;
+        private float attackRequestTime = -1f;
+        private float specialRequestTime = -1f;
 
         public Vector2 MoveInput { get; private set; }
         public Vector2 AimInput { get; private set; }
-        public bool JumpRequested { get; private set; }
-        public bool GrabRequest {get; private set; }
-        public bool AttackRequest {get; private set; }
-        public bool SpecialRequest {get; private set; }
+        public bool JumpRequested => IsPending(jumpRequestTime);
+        public bool GrabRequest => IsPending(grabRequestTime);
+        public bool AttackRequest => IsPending(attackRequestTime);
+        public bool SpecialRequest => IsPending(specialRequestTime);
 
         private void Awake()
         {
@@ -26,71 +37,64 @@ namespace Shadowed.Input
         private void OnDisable()
         {
             inputActions.Player.Disable();
+            MoveInput = Vector2.zero;
+            AimInput = Vector2.zero;
+            ClearRequests();
+        }
+
+        private void OnDestroy()
+        {
+            inputActions?.Dispose();
         }
 
         private void Update()
         {
             MoveInput = inputActions.Player.Move.ReadValue<Vector2>();
             AimInput = inputActions.Player.Aim.ReadValue<Vector2>();
-            if(inputActions.Player.Grab.WasPressedThisFrame())
-            {
-                GrabRequest = true;
-            }
-             if(inputActions.Player.Special.WasPressedThisFrame())
-            {
-                SpecialRequest = true;
-            }
+
+            float now = Time.time;
+
+            if (inputActions.Player.Grab.WasPressedThisFrame())
+                grabRequestTime = now;
+
+            if (inputActions.Player.Special.WasPressedThisFrame())
+                specialRequestTime = now;
 
             if (inputActions.Player.Jump.WasPressedThisFrame())
-            {
-                JumpRequested = true;
-            }
-            if (inputActions.Player.Attack.WasPressedThisFrame())
-            {
-                AttackRequest = true;
-            }
+                jumpRequestTime = now;
+if (inputActions.Player.Attack.WasPressedThisFrame())
+{
+    Debug.Log("INPUT ATTACK DETECTED");
+    attackRequestTime = now;
+}
         }
 
-        public bool ConsumeJumpRequest()
+        public void ClearRequests()
         {
-            if (JumpRequested)
-            {
-                JumpRequested = false;
-                return true;
-            }
-
-            return false;
+            jumpRequestTime = -1f;
+            grabRequestTime = -1f;
+            attackRequestTime = -1f;
+            specialRequestTime = -1f;
         }
-        
-        public bool ConsumeGrabRequest()
+
+        private bool IsPending(float requestTime)
         {
-            if (GrabRequest)
-            {
-                GrabRequest = false;
-                return true;
-            }
-
-            return false;
+            return requestTime >= 0f && Time.time - requestTime <= requestBufferTime;
         }
-        public bool ConsumeAttackRequest()
+
+        private bool Consume(ref float requestTime)
         {
-            if (AttackRequest)
-            {
-                AttackRequest = false;
-                return true;
-            }
-
-            return false;
+            bool pending = IsPending(requestTime);
+            requestTime = -1f;
+            return pending;
         }
-         public bool ConsumeSpecialRequest()
-        {
-            if (SpecialRequest)
-            {
-                SpecialRequest = false;
-                return true;
-            }
 
-            return false;
-        }
+        public bool ConsumeJumpRequest() => Consume(ref jumpRequestTime);
+
+        public bool ConsumeGrabRequest() => Consume(ref grabRequestTime);
+
+        public bool ConsumeAttackRequest() => Consume(ref attackRequestTime);
+
+        public bool ConsumeSpecialRequest() => Consume(ref specialRequestTime);
     }
 }

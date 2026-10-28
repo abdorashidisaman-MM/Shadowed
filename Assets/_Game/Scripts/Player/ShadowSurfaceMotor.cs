@@ -17,6 +17,9 @@ public class ShadowSurfaceMotor : MonoBehaviour
     [SerializeField] private float surfaceOffset = 0.5f;
     [SerializeField] private float initialSurfaceCheckDistance = 2f;
     [SerializeField] private float cornerInset = 0.1f;
+    [Tooltip("When the player is first attached to a surface, if it is within this distance " +
+             "above the surface floor it starts grounded (Idle) instead of falling.")]
+    [SerializeField] private float initialGroundSnapDistance = 0.5f;
     [SerializeField] private LayerMask surfaceMask;
 
 
@@ -158,7 +161,23 @@ public class ShadowSurfaceMotor : MonoBehaviour
 
 
         verticalVelocity = 0f;
-        isSupported = false;
+
+        // If we spawned standing on (or just above) the floor of the
+        // surface, start grounded. Previously this was always false,
+        // which made the player fall a few centimetres on the first
+        // frame and play Jump -> Fall -> Land with no input.
+        isSupported =
+            currentSurface.TrySnapToBottom(
+                transform.position - Vector3.up * initialGroundSnapDistance,
+                surfaceOffset,
+                feetOffset,
+                out Vector3 groundedPosition);
+
+        if (isSupported)
+        {
+            transform.position =
+                groundedPosition;
+        }
 
 
         return true;
@@ -325,9 +344,25 @@ public class ShadowSurfaceMotor : MonoBehaviour
     }
 
 
+    // Re-applies the current surface snap (depth offset etc.) after an
+    // external system (e.g. a Timeline) moved the Player root.
+    public void ResnapToCurrentSurface()
+    {
+        if (currentSurface != null)
+        {
+            AttachToSurface(currentSurface);
+        }
+    }
+
+
     public void AttachToSurface(
         ShadowSurface surface)
     {
+        if (surface == null)
+        {
+            return;
+        }
+
         if (surface.TrySnapPosition(
             transform.position,
             surfaceOffset,

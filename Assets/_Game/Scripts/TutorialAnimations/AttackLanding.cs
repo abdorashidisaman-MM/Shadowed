@@ -90,25 +90,34 @@ public class AttackLanding : MonoBehaviour
     }
 
 
+    // Signal: LandingImpact (weapon contact frame).
     public void LandingImpact()
     {
-        Debug.Log("Landing Impact");
-
-        targetEnemyShadow.TakeDamage(
-            landingDamage
-        );
-       
+        if (targetEnemyShadow != null)
+        {
+            targetEnemyShadow.TakeDamage(
+                landingDamage
+            );
+        }
     }
 
 
+    // Signal: LandingFinished.
     public void LandingFinished()
     {
+        landingAttackReady = false;
+
         playerInteraction.ConsumeEquippedShadow();
         shadowSurfaceMotor.AttachToSurface(
             landingSurface
         );
-        OnDisable();
-        secondSoldierDirector.Play();
 
+        // One-shot sequence: stop listening for further equips.
+        playerInteraction.OnShadowEquipped -= SpecialAttackReady;
+
+        if (secondSoldierDirector != null)
+        {
+            secondSoldierDirector.Play();
+        }
     }
 }

@@ -8,10 +8,27 @@ public class ShadowTraversal : MonoBehaviour
     [SerializeField] private GameObject allyReleasePoint;
     private GameObject currentTarget;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    [Tooltip("Degrees/second used to return the Player root to its original rotation after the launch. " +
+             "The gameplay root must not stay rotated (collider/surface logic).")]
+    [SerializeField] private float rotationReturnSpeed = 180f;
     private bool firstDistanceRiched=true;
     private bool secondDistanceRiched=true;
+    private Quaternion restRotation = Quaternion.identity;
+    private bool returningRotation;
     void Update()
     {
+        if (returningRotation)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, restRotation, rotationReturnSpeed * Time.deltaTime);
+
+            if (Quaternion.Angle(transform.rotation, restRotation) < 0.05f)
+            {
+                transform.rotation = restRotation;
+                returningRotation = false;
+            }
+        }
+
      if(!firstDistanceRiched&&!secondDistanceRiched)
      {
         currentTarget=allyShadow;
@@ -35,6 +52,10 @@ public class ShadowTraversal : MonoBehaviour
             {
                 secondDistanceRiched=true;
                 currentTarget=null;
+                
+                // Return root to vertical orientation.
+                returningRotation = true;
+
                 shadowSurfaceMotor.enabled=false;
                 return;
             }

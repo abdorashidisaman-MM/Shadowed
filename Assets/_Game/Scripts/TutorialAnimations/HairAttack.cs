@@ -15,28 +15,42 @@ public class HairAttack : MonoBehaviour
     void Update()
     {
         if(!hairAttackReady)
-        return;
-        if(!playerInputReader.SpecialRequest)
-        return;
+            return;
+
+        // Consume the press so it is used exactly once.
+        if(!playerInputReader.ConsumeSpecialRequest())
+            return;
+
         StartHairExecution();
     }
     public void SpecialAttackReady()
     {
-    hairAttackReady=true;
-    hairVisuals.SetTrigger(HairAnimation);
-  
+        hairAttackReady=true;
+
+        if (hairVisuals != null)
+        {
+            hairVisuals.SetTrigger(HairAnimation);
+        }
     }
     public void StartHairExecution()
     {
+        // Start once; previously Play() was called every frame
+        // until the ExecutionFinished signal.
+        hairAttackReady=false;
         hairExecution.Play();
     }
     public void HairImpact()
     {
-        Enemy2.TakeDamage(damageAmount);
+        if (Enemy2 != null)
+        {
+            Enemy2.TakeDamage(damageAmount);
+        }
     }
     public void hairExecutionFinished()
     {
         hairAttackReady=false;
+        // Control is normally already returned by the RetrieveControl signal;
+        // kept as a safety net.
         shadowSurfaceMotor.enabled=true;
     }
     
