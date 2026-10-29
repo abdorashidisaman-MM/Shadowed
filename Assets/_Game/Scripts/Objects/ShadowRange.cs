@@ -1,4 +1,6 @@
 using System.Collections;
+using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 
 public class ShadowRange : MonoBehaviour
@@ -10,6 +12,8 @@ public class ShadowRange : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private WeaponAnimation weaponAnimation;
     [SerializeField] private SpriteRenderer weaponSpriteRenderer;
+    [SerializeField] private SpriteRenderer HighlightSpriteRenderer;
+
     public Sprite WeaponSprite
 {
     get
@@ -60,6 +64,7 @@ public class ShadowRange : MonoBehaviour
 
     // True while the shadow is flying and allowed to deal damage.
     public bool IsThrown => currentState == ShadowState.Thrown;
+    public Color c;
 
 
     private void Awake()
@@ -70,7 +75,7 @@ public class ShadowRange : MonoBehaviour
         environmentLayerIndex=LayerMask.NameToLayer("Environment");
         connectionLine = GetComponent<LineRenderer>();
         currentState=ShadowState.World;
-        
+        c = HighlightSpriteRenderer.color;
         if (connectionLine != null)
         {
             connectionLine.positionCount = 2;
@@ -81,10 +86,11 @@ public class ShadowRange : MonoBehaviour
 
     private void Update()
     {
-        if (connectionLine != null && connectionLine.enabled && playerTransform != null)
+        if (connectionLine != null  && playerTransform != null)
         {
             connectionLine.SetPosition(0, transform.position);
             connectionLine.SetPosition(1, playerTransform.position);
+            Highlight();
         }
 
         if (currentState == ShadowState.Thrown &&
@@ -109,11 +115,12 @@ if (foundInteraction != null)
 {
     interaction = foundInteraction;
     playerTransform = foundInteraction.transform;
-
-        if (connectionLine != null)
-        {
-            connectionLine.enabled = true;
-        }
+    
+        HighlightSpriteRenderer.gameObject.SetActive(true);
+       // if (connectionLine != null)
+       // {
+        //    connectionLine.enabled = true;
+      //  }
 
         interaction.AddShadow(this);
     }
@@ -137,7 +144,7 @@ private void OnTriggerExit(Collider other)
     {
         interaction.RemoveShadow(this);
     }
-
+    HighlightSpriteRenderer.gameObject.SetActive(false);
     if (connectionLine != null)
     {
         connectionLine.enabled = false;
@@ -154,9 +161,10 @@ private void OnTriggerExit(Collider other)
             interaction.RemoveShadow(this);
             interaction = null;
         }
-
+        
         if (connectionLine != null)
         {
+            HighlightSpriteRenderer.gameObject.SetActive(false);
             connectionLine.enabled = false;
         }
 
@@ -187,6 +195,7 @@ private void OnTriggerExit(Collider other)
 
         if (interactionCollider != null) interactionCollider.enabled = false;
         if (projectileCollider != null) projectileCollider.enabled = false;
+        HighlightSpriteRenderer.gameObject.SetActive(false);
         if (connectionLine != null) connectionLine.enabled = false;
 
         isTargeted = false;
@@ -305,6 +314,20 @@ private void OnTriggerExit(Collider other)
         }
         Destroy(gameObject);
     }
+    public void Highlight()
+    {
+        
+          
+      c.a = Mathf.PingPong(
+        Time.time * 2,
+        1f
+    );
+
+    HighlightSpriteRenderer.color = c;
+    }
+    
+    
+    
     
 }
 
