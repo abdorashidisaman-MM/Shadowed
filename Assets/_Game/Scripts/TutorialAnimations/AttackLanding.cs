@@ -8,6 +8,7 @@ public class AttackLanding : MonoBehaviour
     [SerializeField] private PlayerShadowInteraction playerInteraction;
     [SerializeField] private PlayerInputReader playerInputReader;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    [SerializeField] private GameObject spear;
 
     [Header("Landing Attack")]
     [SerializeField] private PlayableDirector landingDirector;
@@ -107,7 +108,7 @@ public class AttackLanding : MonoBehaviour
     {
         landingAttackReady = false;
 
-        playerInteraction.ConsumeEquippedShadow();
+        
         shadowSurfaceMotor.AttachToSurface(
             landingSurface
         );
@@ -119,5 +120,10 @@ public class AttackLanding : MonoBehaviour
         {
             secondSoldierDirector.Play();
         }
+    }
+    public void SpearInHead()
+    {
+        playerInteraction.ConsumeEquippedShadow();
+        spear.gameObject.SetActive(true);
     }
 }
