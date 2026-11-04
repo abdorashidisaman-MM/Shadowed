@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 95740778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 2.8799999, z: -0.84}
+  m_LocalPosition: {x: -0.25, y: 2.7, z: 0}
   m_LocalScale: {x: 1.2099999, y: 1.2099999, z: 1.2099999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -534,11 +534,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.35477
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.2075
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -571,6 +571,14 @@ PrefabInstance:
     - target: {fileID: -7552582706839291426, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2193287117112945786, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.001899322
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074439258730450267, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.02778651
       objectReference: {fileID: 0}
     - target: {fileID: 8850200633795455623, guid: 3189086fefc55fb45a6d0639b20a80f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -640,6 +648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 230400862}
+  - component: {fileID: 230400863}
   m_Layer: 7
   m_Name: EnemyHumanVisuals
   m_TagString: Untagged
@@ -656,13 +665,26 @@ Transform:
   m_GameObject: {fileID: 230400861}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -2.13, y: -2.86, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.13, y: -0.4, z: -5.84}
+  m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1099450859}
   m_Father: {fileID: 1012615004}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!210 &230400863
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230400861}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &244045968 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9053045286791942695, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -681,9 +703,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   enemyHealth: {fileID: 244045972}
-  normalVisuals: {fileID: 979075068}
+  shadowVisuals: {fileID: 979075068}
   deathVisual: {fileID: 95740778}
-  destroyDelay: 1.5
+  deathVisualDuration: 1.5
 --- !u!114 &244045972 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7900007864054780914, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -892,6 +914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321143144}
+  - component: {fileID: 321143145}
   m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
@@ -915,6 +938,19 @@ Transform:
   - {fileID: 136796781}
   m_Father: {fileID: 1555563537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &321143145
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321143143}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!114 &332597939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6199394994660441801, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -1606,6 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 443304508}
+  - component: {fileID: 443304509}
   m_Layer: 7
   m_Name: EnemyHumanVisuals
   m_TagString: Untagged
@@ -1622,13 +1659,26 @@ Transform:
   m_GameObject: {fileID: 443304507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: -4.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.24, y: 3.32, z: -6.45}
+  m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 602338996}
   m_Father: {fileID: 1312191666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &443304509
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443304507}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &475466926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3818409150295394331, guid: 9cedee8a583f1df448c8005ead33d87c, type: 3}
@@ -2125,8 +2175,6 @@ PlayableDirector:
     value: {fileID: 1141988567}
   - key: {fileID: 6168291763030683189, guid: 81fc5417ee0e6f14da197d1361fc8a2c, type: 2}
     value: {fileID: 602338997}
-  - key: {fileID: -1554169871020337950, guid: 81fc5417ee0e6f14da197d1361fc8a2c, type: 2}
-    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &692254973
@@ -3060,6 +3108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979075069}
+  - component: {fileID: 979075070}
   m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
@@ -3083,6 +3132,19 @@ Transform:
   - {fileID: 1946078274}
   m_Father: {fileID: 244045973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &979075070
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979075068}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &995653881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,6 +3154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 995653882}
+  - component: {fileID: 995653883}
   m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
@@ -3115,6 +3178,19 @@ Transform:
   - {fileID: 1635396364}
   m_Father: {fileID: 1012615004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &995653883
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995653881}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &1012615002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9053045286791942695, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -3171,9 +3247,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   enemyHealth: {fileID: 1012615007}
-  normalVisuals: {fileID: 995653881}
+  shadowVisuals: {fileID: 995653881}
   deathVisual: {fileID: 940861245}
-  destroyDelay: 1.5
+  deathVisualDuration: 1.5
 --- !u!1001 &1016870758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3316,10 +3392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePositionComposer
-  CameraDistance: 10
+  CameraDistance: 6.47
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0.12}
+    ScreenPosition: {x: 0, y: 0.19}
     DeadZone:
       Enabled: 0
       Size: {x: 0.8, y: 0.73}
@@ -3328,7 +3404,7 @@ MonoBehaviour:
       Size: {x: 0.92, y: 0.94}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: 0, z: -2.45}
   Damping: {x: 1, y: 1, z: 1}
   Lookahead:
     Enabled: 0
@@ -3359,7 +3435,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 86.7
+    FieldOfView: 100.5
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -3387,7 +3463,7 @@ Transform:
   m_GameObject: {fileID: 1027152464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.04, y: 2.3656032, z: -10.85}
+  m_LocalPosition: {x: -4.04, y: 3.0561447, z: -9.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4276,9 +4352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   enemyHealth: {fileID: 1141528542}
-  normalVisuals: {fileID: 1580479278}
+  shadowVisuals: {fileID: 1580479278}
   deathVisual: {fileID: 1765622750}
-  destroyDelay: 1.5
+  deathVisualDuration: 1.5
 --- !u!1 &1141988565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 41eb70fc781aed844b49d26ef2a5cbe5, type: 3}
@@ -6241,7 +6317,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 86.7
+  field of view: 100.5
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6268,7 +6344,7 @@ Transform:
   m_GameObject: {fileID: 1530915452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.04, y: 2.3656032, z: -10.85}
+  m_LocalPosition: {x: -4.04, y: 3.0561447, z: -9.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6632,9 +6708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   enemyHealth: {fileID: 1555563536}
-  normalVisuals: {fileID: 321143143}
+  shadowVisuals: {fileID: 321143143}
   deathVisual: {fileID: 1638213455}
-  destroyDelay: 1.5
+  deathVisualDuration: 1.5
 --- !u!114 &1555563536 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7900007864054780914, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -6676,6 +6752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580479279}
+  - component: {fileID: 1580479280}
   m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
@@ -6699,6 +6776,19 @@ Transform:
   - {fileID: 290802219}
   m_Father: {fileID: 125045768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1580479280
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580479278}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &1603292565
 GameObject:
   m_ObjectHideFlags: 0
@@ -7139,7 +7229,7 @@ Transform:
   m_GameObject: {fileID: 1638213455}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 2.8799999, z: -0.84}
+  m_LocalPosition: {x: -0.25, y: 2.7, z: 0}
   m_LocalScale: {x: 1.2099999, y: 1.2099999, z: 1.2099999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7800,7 +7890,7 @@ Transform:
   m_GameObject: {fileID: 1765622750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 2.8799999, z: -0.84}
+  m_LocalPosition: {x: -0.25, y: 2.7, z: 0}
   m_LocalScale: {x: 1.2099999, y: 1.2099999, z: 1.2099999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7855,7 +7945,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2114355081, guid: 9fcaa6a483f41b84aa157744c5285756, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7863,7 +7953,7 @@ SpriteRenderer:
   m_Size: {x: 1.73, y: 9.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!95 &1765622754
@@ -8774,6 +8864,7 @@ GameObject:
   - component: {fileID: 1925824431}
   - component: {fileID: 1925824432}
   - component: {fileID: 1925824433}
+  - component: {fileID: 1925824434}
   m_Layer: 7
   m_Name: EnemyVisuals
   m_TagString: Untagged
@@ -8833,6 +8924,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
   m_Library: []
   m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 9e46c2fa837dbab41a7cd0150ea83835, type: 3}
+--- !u!210 &1925824434
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925824430}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &1928813918 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9053045286791942695, guid: 94f488b1b0a867943bbddb63ef502a4c, type: 3}
@@ -8862,9 +8966,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeath
   enemyHealth: {fileID: 1928813921}
-  normalVisuals: {fileID: 1925824430}
+  shadowVisuals: {fileID: 1925824430}
   deathVisual: {fileID: 1386534523}
-  destroyDelay: 1.5
+  deathVisualDuration: 1.5
 --- !u!4 &1946078274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 41eb70fc781aed844b49d26ef2a5cbe5, type: 3}
@@ -9709,6 +9813,19 @@ MonoBehaviour:
   minimumdistance: 0.1
   shadowSurfaceMotor: {fileID: 1771011927}
   rotationReturnSpeed: 180
+--- !u!210 &2032389137
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814997574}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &2051275836
 GameObject:
   m_ObjectHideFlags: 0
@@ -10289,6 +10406,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2032389131}
+    - targetCorrespondingSourceObject: {fileID: 3235003580075644676, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2032389137}
   m_SourcePrefab: {fileID: 100100000, guid: caa2fb790ed32e046a7bfa5e6b3796f2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
