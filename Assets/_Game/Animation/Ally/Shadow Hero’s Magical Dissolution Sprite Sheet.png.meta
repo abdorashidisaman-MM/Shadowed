@@ -1,0 +1,671 @@
+fileFormatVersion: 2
+guid: d15e95cc23e3e964fa4082c4a67d9a19
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_0"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f49af08bd28b63b4ba68c162b0d5420d
+      internalID: -1358013742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_1"
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beed9ecffb3e0284bb380558c257e89c
+      internalID: 883727235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_2"
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27855897301109a4e94706635ab7abcc
+      internalID: 709718282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_3"
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a729aafa7b2e0f458578fc9f551589b
+      internalID: 891630836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_4"
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b5fa0e8c88ac73499823caf3675d02c
+      internalID: 857013497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_5"
+      rect:
+        serializedVersion: 2
+        x: 1393
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef4f6b9c7d2b034e9783babbb71a8c9
+      internalID: 966783973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_6"
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 676e84aa784c2744f8b87aa5d26fd6f5
+      internalID: 120956687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_7"
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 495
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646b4819b23184249a02ff988a0eee64
+      internalID: 1022657280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_8"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08038931a8c9b304db48f8723dad1a48
+      internalID: -440186784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_9"
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d785e2c9ad6587d4f8c218580c9d76f3
+      internalID: 160994504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_10"
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980f079f7a377cd40aeb0051cde055c2
+      internalID: -527127714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_11"
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29aa6c6b600db42478ae54edb2d18020
+      internalID: -840888556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_12"
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a041c1cd4a753cd41ae464e2566f837c
+      internalID: 1132342502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_13"
+      rect:
+        serializedVersion: 2
+        x: 1393
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38334c0686d482a4d8c91f53213b952b
+      internalID: -218213980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_14"
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbe9f06069602fd40878f008d29d66a8
+      internalID: 14896586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_15"
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 255
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1afc7dcb4aae2f49a8764234ea75d34
+      internalID: 1911490456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_16"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0b4984b4c94d441bee329260c83a14
+      internalID: 1661964140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_17"
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 971e785cdcf81d1419870bf717b5a5ac
+      internalID: -1886633996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_18"
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a200d90ec89e0884c8b7f37cdd3ac11f
+      internalID: -232914353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_19"
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a20da152d3eda14891a1d3d6caed724
+      internalID: 1648629555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_20"
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fb1fdc36c527b5489affc7d1e5c00fc
+      internalID: -2068460715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_21"
+      rect:
+        serializedVersion: 2
+        x: 1393
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef67ca26262f523448ba813b1e000e1b
+      internalID: 433580177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_22"
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff6fb7230ce4274eba75a520f85cbe0
+      internalID: 567640651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_23"
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 15
+        width: 237
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ae7daf2c9d56c144af3d00cfd2664ea
+      internalID: -168342266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: af197a56c06a84e4aaec94f52e3039a6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":237.0,"y":228.0},"gridSpriteOffset":{"x":48.0,"y":1.0},"gridSpritePadding":{"x":32.0,"y":12.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_0": -1358013742
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_1": 883727235
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_10": -527127714
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_11": -840888556
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_12": 1132342502
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_13": -218213980
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_14": 14896586
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_15": 1911490456
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_16": 1661964140
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_17": -1886633996
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_18": -232914353
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_19": 1648629555
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_2": 709718282
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_20": -2068460715
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_21": 433580177
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_22": 567640651
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_23": -168342266
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_3": 891630836
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_4": 857013497
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_5": 966783973
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_6": 120956687
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_7": 1022657280
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_8": -440186784
+      "Shadow Hero\u2019s Magical Dissolution Sprite Sheet_9": 160994504
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

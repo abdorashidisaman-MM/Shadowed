@@ -6,6 +6,7 @@ public class AllyHandInteraction : MonoBehaviour
 {
     [SerializeField] private PlayableDirector allyAssistDirector;
     [SerializeField] private ShadowSurfaceMotor shadowSurfaceMotor;
+    [SerializeField] private Animator animator;
     
     private Collider interactionZone;
 
@@ -14,6 +15,8 @@ public class AllyHandInteraction : MonoBehaviour
 
     private bool playerInReach;
     private int playerLayer;
+    private static readonly int ReachHash =
+        Animator.StringToHash("Reach");
     
    
 
@@ -73,7 +76,8 @@ public class AllyHandInteraction : MonoBehaviour
 
         playerInputReader =
             other.GetComponentInParent<PlayerInputReader>();
-
+            
+        animator.SetBool(ReachHash,true);
 
         if (playerInputReader == null)
         {
@@ -91,11 +95,12 @@ public class AllyHandInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        animator.SetBool(ReachHash,false);
         if (other.gameObject.layer != playerLayer)
         {
             return;
         }
-
+        animator.SetBool(ReachHash,false);
 
         playerInReach = false;
         playerInputReader = null;

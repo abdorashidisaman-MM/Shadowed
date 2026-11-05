@@ -17,6 +17,9 @@ public class ShadowTraversal : MonoBehaviour
     [SerializeField] private float slowDownDistance = 3f;
 
     [SerializeField] private float minimumdistance = 0.1f;
+    [SerializeField] private Animator AllyAnimator;
+     private static readonly int Finished=
+        Animator.StringToHash("Finished");
 
 
     [Header("References")]
@@ -188,7 +191,9 @@ public class ShadowTraversal : MonoBehaviour
         GameObject target,
         float speed
     )
+    
     {
+        AllyAnimator.SetTrigger(Finished);
         if (target == null)
             return;
 
