@@ -1,105 +1,194 @@
-Shadowed
+# SHADOWED
 
-Shadowed is a 2.5D stealth game currently in development in Unity.
+**Unity 6 / C# Gameplay Prototype**  
+**Solo Developer & Technical Game Designer — Saman Abdolrashidi**
 
-The project explores the relationship between light, shadows, fear, guilt, and rage, using shadows not only as part of the visual style but as the central gameplay mechanic.
-
-Story
-
-The player controls a young man who survives a violent protest in which several of his friends are killed.
-
-After surviving, he becomes consumed by guilt, fear, and rage. As these emotions grow stronger, he gradually loses his connection with himself and eventually begins to become his own shadow.
-
-The shadows of his lost friends also remain present in the world, helping him during parts of his journey.
-
-The transformation of the protagonist is both part of the story and part of the gameplay.
-
-Core Concept
-
-In Shadowed, shadows are interactive parts of the environment.
-
-The player can use them to hide, move through dangerous areas, and interact with the world.
-
-The long-term idea is to allow the player to:
-
-- Hide inside shadows
-- Move or transition between nearby shadows
-- Select shadows using directional aiming
-- Interact with enemy shadows
-- Affect enemies through their shadows
-- Use shadows created by environmental objects
-- Manipulate shadows using light sources
-- Use the shadows of fallen friends for traversal or special interactions
-- Solve environmental puzzles based on light and shadow
-
-The position and strength of light will eventually influence how useful different shadows are.
-
-Current Development
-
-The project is currently a playable prototype.
-
-So far I have implemented:
-
-- Player movement
-- Free directional aiming
-- Detection of nearby shadow areas
-- Entering and leaving shadow zones
-- Tracking multiple nearby shadows
-- Visual connection between the player and shadows
-- The foundation of a system for selecting a shadow based on the player's aiming direction
-- Controller support
-
-The current focus is building the core shadow interaction system before expanding the game into more complex stealth and level-design mechanics.
-
-Planned Features
-
-Future development includes:
-
-- Shadow-to-shadow movement
-- Enemy AI
-- Stealth and detection systems
-- Enemy-shadow interactions
-- Light manipulation
-- Environmental shadow puzzles
-- Shadow-based combat
-- Different types of interactive shadows
-- Abilities connected to the protagonist's dead friends
-- More developed levels and environments
-- Animation
-- Sound design and original music
-- Narrative sequences
-- A polished playable level / vertical slice
-
-Development Goals
-
-Shadowed is both a personal game project and a portfolio project.
-
-My goal is to use it to improve my skills in:
-
-- Game design
-- Gameplay programming
-- Level design
-- Player interaction systems
-- Unity development
-- Narrative game design
-- Creating mechanics that connect directly with a game's story and themes
-
-Rather than treating the narrative and mechanics separately, I want the protagonist's psychological transformation to be reflected directly in the way the player interacts with the world.
-
-Status
-
-Currently in active development.
-
-The project is still at the prototype stage and several mechanics, visuals, animations, sounds, and levels are temporary or incomplete.
-
-The current priority is creating a strong and reusable foundation for the main shadow mechanics before moving toward a polished playable version.
+> A narrative action-stealth prototype where shadows are not just visual effects — they are the world the player interacts with.
 
 ---
 
-Developer: Saman Abdolrashidi
+## Gameplay
 
-Engine: Unity 6
+## Gameplay Video
 
-Genre: 2.5D Stealth / Narrative / Puzzle
+▶️ [Watch the Shadowed gameplay prototype](https://youtu.be/JvoRQIxdFYw)
 
-Project: Shadowed
+Shadowed is a 2.5D gameplay prototype built around a parallel relationship between the physical world and its shadows.
+
+The player controls a man who survives a violent event that kills several of his friends. As guilt, fear, and rage begin to consume him, he gradually loses his physical identity and becomes part of the shadow world.
+
+The shadows of his lost friends remain behind and can occasionally help him.
+
+The central design goal is to make the narrative transformation affect the mechanics themselves rather than separating story and gameplay.
+
+---
+
+## Core Gameplay Idea
+
+Physical objects and characters create shadows that exist as interactive gameplay elements.
+
+The player can:
+
+- Traverse along shadow surfaces
+- Detect and select nearby interactive shadows
+- Aim toward shadows using directional controller input
+- Grab shadow objects
+- Pull weapons through the shadow world
+- Aim and throw shadow weapons
+- Attack an enemy's shadow to damage their physical body
+- Use ally shadows for traversal and special interactions
+- Move between gameplay and cinematic sequences
+
+Light and shadow are intended to become both environmental constraints and gameplay resources.
+
+---
+
+## Current Playable Prototype
+
+The current build contains a playable gameplay sequence demonstrating:
+
+- Custom shadow-surface traversal
+- Controller-based movement and directional aiming
+- Shadow detection and interaction
+- Weapon grabbing and throwing
+- Ally-assisted traversal
+- Enemy shadow / physical-body damage connection
+- Enemy patrol, chase and attack behavior
+- Gameplay-triggered character animations
+- Cinematic gameplay sequences
+- Enemy death reactions
+- 2D skeletal character animation
+- Player control transfer between gameplay and scripted sequences
+
+The prototype currently uses greybox environments so development can remain focused on gameplay systems and interaction design.
+
+---
+
+## Systems I Implemented
+
+### Player & Traversal
+
+- Custom surface-based movement system
+- Horizontal traversal along authored shadow surfaces
+- Jumping and gravity
+- Surface attachment and re-snapping
+- Controller input through Unity's New Input System
+
+### Shadow Interaction
+
+- Detection of nearby interactive shadows
+- Multiple-shadow tracking
+- Directional shadow selection
+- Visual player-to-shadow connection
+- Grab interaction
+- Weapon availability and ownership states
+
+### Combat
+
+- Directional aiming
+- Shadow weapon pickup
+- Animated weapon movement toward the player
+- Held weapon representation
+- Projectile throwing
+- Collision-based damage
+- Enemy shadow damage affecting the physical enemy
+
+### Enemy Systems
+
+- Enemy health system
+- Patrol / chase / attack states
+- Attack ranges
+- Death events
+- Synchronized shadow and human reactions
+- Gameplay-triggered death animations
+
+### Animation & Sequences
+
+- Unity Animator
+- Unity Timeline / PlayableDirector
+- Unity 2D Animation
+- SpriteSkin skeletal animation
+- Animation Events
+- Event-driven gameplay sequencing
+- Transitions between player-controlled gameplay and scripted moments
+
+---
+
+## Technology
+
+- **Engine:** Unity 6
+- **Language:** C#
+- **Rendering:** Universal Render Pipeline
+- **Input:** Unity New Input System
+- **Animation:** Unity Animator, Timeline, 2D Animation, SpriteSkin
+- **Version Control:** Git / GitHub
+- **Target Platform:** Windows PC
+
+---
+
+## Development Approach
+
+Shadowed is being developed as both a personal game project and a technical portfolio project.
+
+My focus has been on building the mechanics myself and understanding why each system works rather than relying on large pre-built gameplay frameworks.
+
+Development follows an iterative process:
+
+**Prototype → Test → Refactor → Integrate → Polish**
+
+The project has also been an opportunity to work across gameplay programming, technical design, animation integration, narrative design, debugging and visual prototyping.
+
+---
+
+## Design Philosophy
+
+The main question behind Shadowed is:
+
+> **What if a character's emotional transformation changed the rules of the world the player interacts with?**
+
+Fear, guilt and rage are not intended to exist only in dialogue or cutscenes.
+
+The goal is for those themes to influence traversal, combat, light, interaction and the player's relationship with the environment.
+
+---
+
+## Current Status
+
+**Playable portfolio prototype / vertical slice**
+
+The current build demonstrates the main gameplay direction and several interconnected systems.
+
+The project is still in development. Environment art, effects, animation, sound and some systems remain prototype-quality and will continue to evolve.
+
+---
+
+## Future Development
+
+Future work may include:
+
+- More advanced light manipulation
+- Shadow-based stealth mechanics
+- Environmental puzzles
+- Additional enemy behaviors
+- More traversal combinations
+- Expanded ally-shadow abilities
+- Cinemachine camera work
+- Sound design and original music
+- More polished environments
+- A larger playable level
+
+---
+
+## Developer
+
+**Saman Abdolrashidi**
+
+Junior Unity Developer / Technical Game Designer
+
+Bologna, Italy
+
+GitHub:  
+https://github.com/abdorashidisaman-MM
+
+Project Repository:  
+https://github.com/abdorashidisaman-MM/Shadowed
